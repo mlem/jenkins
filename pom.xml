@@ -899,5 +899,144 @@ THE SOFTWARE.
         </plugins>
       </build>
     </profile>
+    <profile>
+            <id>sonar-local</id>
+            <properties>
+
+                <maven.compiler.source>1.8</maven.compiler.source>
+                <maven.compiler.target>1.8</maven.compiler.target>
+
+                <!-- compiler and surefire plugin settings for "java" profiles -->
+                <commons.compiler.fork>false</commons.compiler.fork>
+                <commons.compiler.compilerVersion />
+                <commons.compiler.javac />
+                <commons.surefire.java />
+
+                <!-- plugin versions (allows same value in reporting and build sections) -->
+                <commons.changes.version>2.11</commons.changes.version>
+                <commons.compiler.version>3.2</commons.compiler.version>
+                <commons.findbugs.version>2.5.5</commons.findbugs.version>
+                <commons.jacoco.version>0.7.8</commons.jacoco.version>
+                <commons.javadoc.version>2.10.1</commons.javadoc.version>
+                <commons.jdepend.version>2.0</commons.jdepend.version>
+                <commons.jxr.version>2.4</commons.jxr.version>
+                <commons.pmd.version>3.2</commons.pmd.version>
+                <commons.project-info.version>2.7</commons.project-info.version>
+                <commons.site-plugin.version>3.4</commons.site-plugin.version>
+                <commons.surefire-report.version>2.17</commons.surefire-report.version>
+                <commons.surefire.version>2.19.1</commons.surefire.version>
+                <commons.failsafe.version>2.19.1</commons.failsafe.version>
+                <commons.taglist.version>2.4</commons.taglist.version>
+                <commons.wagon-ssh.version>2.6</commons.wagon-ssh.version>
+
+                <sonar.host.url>http://localhost:9000</sonar.host.url>
+                <sonar.jdbc.url>jdbc:postgresql://localhost:5432/sonar</sonar.jdbc.url>
+                <sonar.jdbc.username>categories</sonar.jdbc.username>
+                <sonar.jdbc.password>categories</sonar.jdbc.password>
+                <skipTests>false</skipTests>
+                <skipITs>${skipTests}</skipITs>
+                <skipUTs>${skipTests}</skipUTs>
+                <commons.jacoco.version>0.7.8</commons.jacoco.version>
+                <commons.surefire.version>2.19.1</commons.surefire.version>
+                <commons.failsafe.version>2.19.1</commons.failsafe.version>
+                <commons.findbugs.version>2.5.5</commons.findbugs.version>
+
+                <jacoco.reportPath.integration>${project.build.directory}/jacoco-it.exec</jacoco.reportPath.integration>
+                <jacoco.reportPath.unit>${project.build.directory}/jacoco.exec</jacoco.reportPath.unit>
+
+                <maven-surefire-plugin.argLine>-Xmx256m -Djava.awt.headless=true</maven-surefire-plugin.argLine>
+                <maven-failsafe-plugin.argLine>-Xmx1024m -Djava.awt.headless=true</maven-failsafe-plugin.argLine>
+                <surefireArgLine/>
+                <failsafeArgLine/>
+            </properties>
+            <reporting>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-jxr-plugin</artifactId>
+                        <version>${commons.jxr.version}</version>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-pmd-plugin</artifactId>
+                        <version>${commons.pmd.version}</version>
+                        <configuration>
+                            <targetJdk>${maven.compiler.source}</targetJdk>
+                            <rulesets>
+                                <ruleset>/rulesets/java/basic.xml</ruleset>
+                                <ruleset>/rulesets/java/imports.xml</ruleset>
+                                <ruleset>/rulesets/java/unusedcode.xml</ruleset>
+                                <ruleset>/rulesets/java/finalizers.xml</ruleset>
+                            </rulesets>
+                        </configuration>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-report-plugin</artifactId>
+                        <version>${commons.surefire.version}</version>
+                        <configuration>
+                            <aggregate>${commons.surefire-report.aggregate}</aggregate>
+                        </configuration>
+                    </plugin>
+                    <!-- Other plugins, alpha order by groupId and artifactId -->
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>findbugs-maven-plugin</artifactId>
+                        <version>${commons.findbugs.version}</version>
+                        <configuration>
+                            <threshold>Normal</threshold>
+                        </configuration>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>jdepend-maven-plugin</artifactId>
+                        <version>${commons.jdepend.version}</version>
+                    </plugin>
+                </plugins>
+            </reporting>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-failsafe-plugin</artifactId>
+                        <version>${commons.failsafe.version}</version>
+                        <executions>
+                            <execution>
+                                <id>default-integration-test</id>
+                                <goals>
+                                    <goal>integration-test</goal>
+                                    <goal>verify</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <skipTests>${skipITs}</skipTests>
+                            <!-- Sets the VM argument line used when unit tests are run - set by the maven-jacoco-plugin  -->
+                            <argLine>@{failsafeArgLine} ${maven-failsafe-plugin.argLine}</argLine>
+                        </configuration>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <version>${commons.surefire.version}</version>
+                        <configuration>
+                            <skipTests>${skipUTs}</skipTests>
+                            <!-- Sets the VM argument line used when unit tests are run - set by the maven-jacoco-plugin  -->
+                            <argLine>@{surefireArgLine} ${maven-surefire-plugin.argLine}</argLine>
+                        </configuration>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.sonarsource.scanner.maven</groupId>
+                        <artifactId>sonar-maven-plugin</artifactId>
+                        <version>3.2</version>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.jacoco</groupId>
+                        <artifactId>jacoco-maven-plugin</artifactId>
+                        <version>${commons.jacoco.version}</version>
+                    </plugin>
+                </plugins>
+            </build>
+     </profile>
   </profiles>
 </project>
