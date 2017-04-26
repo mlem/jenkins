@@ -105,11 +105,8 @@ import java.util.logging.Logger;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
 import javax.servlet.ServletException;
-import jenkins.model.BlockedBecauseOfBuildInProgress;
-import jenkins.model.Jenkins;
-import jenkins.model.JenkinsLocationConfiguration;
-import jenkins.model.ParameterizedJobMixIn;
-import jenkins.model.Uptime;
+
+import jenkins.model.*;
 import jenkins.model.lazy.LazyBuildMixIn;
 import jenkins.scm.DefaultSCMCheckoutStrategyImpl;
 import jenkins.scm.SCMCheckoutStrategy;
@@ -226,10 +223,10 @@ public abstract class AbstractProject<P extends AbstractProject<P,R>,R extends A
      * Null if no explicit configuration is required.
      *
      * <p>
-     * Can't store {@link JDK} directly because {@link Jenkins} and {@link Project}
+     * Can't store {@link JDK} directly because {@link JenkinsImpl} and {@link Project}
      * are saved independently.
      *
-     * @see Jenkins#getJDK(String)
+     * @see JenkinsImpl#getJDK(String)
      */
     private volatile String jdk;
 

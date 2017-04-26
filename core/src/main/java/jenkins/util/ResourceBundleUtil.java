@@ -23,6 +23,7 @@
  */
 package jenkins.util;
 
+import jenkins.model.JenkinsImpl;
 import net.sf.json.JSONObject;
 import org.kohsuke.accmod.Restricted;
 import org.kohsuke.accmod.restrictions.NoExternalUse;
@@ -77,7 +78,7 @@ public class ResourceBundleUtil {
             return bundleJSON;
         }
 
-        ResourceBundle bundle = getBundle(baseName, locale, Jenkins.class.getClassLoader());
+        ResourceBundle bundle = getBundle(baseName, locale, JenkinsImpl.class.getClassLoader());
         if (bundle == null) {
             // Not in Jenkins core. Check the plugins.
             Jenkins jenkins = Jenkins.getInstance(); // will never return null

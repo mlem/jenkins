@@ -23,7 +23,7 @@
  */
 package hudson.security;
 
-import jenkins.model.Jenkins;
+import jenkins.model.JenkinsImpl;
 import jenkins.security.ConfidentialStore;
 import org.acegisecurity.ui.rememberme.RememberMeServices;
 import org.acegisecurity.Authentication;
@@ -35,7 +35,7 @@ import javax.servlet.http.HttpServletResponse;
  * {@link RememberMeServices} proxy.
  *
  * <p>
- * In Jenkins, we need {@link Jenkins} instance to perform remember-me service,
+ * In Jenkins, we need {@link JenkinsImpl} instance to perform remember-me service,
  * because it relies on {@link ConfidentialStore}. However, security
  * filters can be initialized before Jenkins is initialized.
  * (See #1210 for example.)

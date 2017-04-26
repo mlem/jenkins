@@ -1,7 +1,7 @@
 package hudson.cli;
 
 import hudson.Extension;
-import jenkins.model.Jenkins;
+import jenkins.model.JenkinsImpl;
 
 /**
  * Prints the current session ID number (that changes for every run)
@@ -17,7 +17,7 @@ public class SessionIdCommand extends CLICommand {
     }
 
     protected int run() {
-        stdout.println(Jenkins.SESSION_HASH);
+        stdout.println(JenkinsImpl.SESSION_HASH);
         return 0;
     }
 }

@@ -24,13 +24,12 @@
 package hudson.util
 
 import com.trilead.ssh2.crypto.Base64;
-import jenkins.model.Jenkins
+import jenkins.model.JenkinsImpl
 import jenkins.security.ConfidentialStoreRule;
 import org.apache.commons.lang.RandomStringUtils;
 import org.junit.Rule
 import org.junit.Test
 
-import java.util.Random;
 import javax.crypto.Cipher
 import java.util.regex.Pattern;
 
@@ -90,11 +89,11 @@ public class SecretTest {
     @Test
     void testSerialization() {
         def s = Secret.fromString("Mr.Jenkins");
-        def xml = Jenkins.XSTREAM.toXML(s);
+        def xml = JenkinsImpl.XSTREAM.toXML(s);
         assert !xml.contains(s.plainText)
         assert xml ==~ /<hudson\.util\.Secret>\{[A-Za-z0-9+\/]+={0,2}}<\/hudson\.util\.Secret>/
 
-        def o = Jenkins.XSTREAM.fromXML(xml);
+        def o = JenkinsImpl.XSTREAM.fromXML(xml);
         assert o==s : xml;
     }
 
@@ -110,7 +109,7 @@ public class SecretTest {
         def tagName = Foo.class.name.replace("\$","_-");
         def xml = "<$tagName><password>secret</password></$tagName>";
         def foo = new Foo();
-        Jenkins.XSTREAM.fromXML(xml, foo);
+        JenkinsImpl.XSTREAM.fromXML(xml, foo);
         assert "secret"==Secret.toString(foo.password)
     }
 

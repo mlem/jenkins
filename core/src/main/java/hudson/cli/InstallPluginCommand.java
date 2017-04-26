@@ -31,11 +31,11 @@ import jenkins.model.Jenkins;
 import hudson.model.UpdateSite;
 import hudson.model.UpdateSite.Data;
 import hudson.util.EditDistance;
+import jenkins.model.JenkinsImpl;
 import org.kohsuke.args4j.Argument;
 import org.kohsuke.args4j.Option;
 
 import java.io.File;
-import java.io.IOException;
 import java.net.URL;
 import java.net.MalformedURLException;
 import java.util.HashSet;
@@ -73,7 +73,7 @@ public class InstallPluginCommand extends CLICommand {
     public boolean dynamicLoad;
 
     protected int run() throws Exception {
-        Jenkins h = Jenkins.getActiveInstance();
+        JenkinsImpl h = Jenkins.getActiveInstance();
         h.checkPermission(PluginManager.UPLOAD_PLUGINS);
         PluginManager pm = h.getPluginManager();
 

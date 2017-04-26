@@ -32,6 +32,7 @@ import hudson.security.Permission;
 import hudson.util.FormApply;
 import jenkins.model.GlobalConfigurationCategory;
 import jenkins.model.Jenkins;
+import jenkins.model.JenkinsImpl;
 import net.sf.json.JSONObject;
 
 import org.kohsuke.accmod.Restricted;
@@ -80,7 +81,7 @@ public class GlobalToolConfiguration extends ManagementLink {
     }
 
     private boolean configure(StaplerRequest req, JSONObject json) throws hudson.model.Descriptor.FormException, IOException {
-        Jenkins j = Jenkins.getInstance();
+        JenkinsImpl j = Jenkins.getInstance();
         j.checkPermission(Jenkins.ADMINISTER);
 
         boolean result = true;

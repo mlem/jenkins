@@ -31,6 +31,7 @@ import hudson.security.AccessControlled;
 import hudson.slaves.ComputerListener;
 import hudson.slaves.RetentionStrategy;
 import jenkins.model.Jenkins;
+import jenkins.model.JenkinsImpl;
 import org.kohsuke.stapler.StaplerFallback;
 import org.kohsuke.stapler.StaplerProxy;
 
@@ -61,7 +62,7 @@ public abstract class AbstractCIBase extends Node implements ItemGroup<TopLevelI
    /**
      * @deprecated
      *      Why are you calling a method that always returns ""?
-    *       You probably want to call {@link Jenkins#getRootUrl()}
+    *       You probably want to call {@link JenkinsImpl#getRootUrl()}
      */
     @Deprecated
     public String getUrl() {
@@ -97,7 +98,7 @@ public abstract class AbstractCIBase extends Node implements ItemGroup<TopLevelI
      * ============================================================================================================== */
 
      /**
-     * Returns all {@link Node}s in the system, excluding {@link jenkins.model.Jenkins} instance itself which
+     * Returns all {@link Node}s in the system, excluding {@link JenkinsImpl} instance itself which
      * represents the master.
      */
     public abstract List<Node> getNodes();

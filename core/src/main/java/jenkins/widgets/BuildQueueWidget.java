@@ -2,13 +2,13 @@ package jenkins.widgets;
 
 import hudson.Extension;
 import hudson.widgets.Widget;
-import jenkins.model.Jenkins;
+import jenkins.model.JenkinsImpl;
 import org.jenkinsci.Symbol;
 
 /**
  * Show the default build queue.
  *
- * A plugin may remove this from {@link Jenkins#getWidgets()} and swap in their own.
+ * A plugin may remove this from {@link JenkinsImpl#getWidgets()} and swap in their own.
  *
  * @author Kohsuke Kawaguchi
  * @since 1.514

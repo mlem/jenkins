@@ -51,7 +51,7 @@ public class JenkinsDescriptorTest {
     }
 
     private FormValidation checkBuildsDir(String buildsDir) {
-        return Jenkins.DescriptorImpl.INSTANCE.doCheckRawBuildsDir(buildsDir);
+        return JenkinsImpl.DescriptorImpl.INSTANCE.doCheckRawBuildsDir(buildsDir);
     }
 
     private boolean isOK(String buildsDir) {
@@ -63,11 +63,11 @@ public class JenkinsDescriptorTest {
     }
 
     @Test
-    @PrepareForTest(Jenkins.class)
+    @PrepareForTest(JenkinsImpl.class)
     public void testBuildDirValidation() {
-        PowerMockito.mockStatic(Jenkins.class);
+        PowerMockito.mockStatic(JenkinsImpl.class);
         PowerMockito.when(Jenkins.getInstance()).thenReturn(jenkins);
-        PowerMockito.when(Jenkins.expandVariablesForDirectory(anyString(), anyString(), anyString())).thenCallRealMethod();
+        PowerMockito.when(JenkinsImpl.expandVariablesForDirectory(anyString(), anyString(), anyString())).thenCallRealMethod();
         when(jenkins.getRootDir()).thenReturn(new File(".").getAbsoluteFile());
 
         assertTrue(isOK("$JENKINS_HOME/foo/$ITEM_FULL_NAME"));

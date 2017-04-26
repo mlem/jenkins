@@ -37,6 +37,7 @@ import hudson.tasks.Builder;
 import hudson.util.ReflectionUtils.Parameter;
 import jenkins.model.Jenkins;
 
+import jenkins.model.JenkinsImpl;
 import org.kohsuke.stapler.HttpResponse;
 import org.kohsuke.stapler.QueryParameter;
 import org.kohsuke.stapler.StaplerRequest;
@@ -271,7 +272,7 @@ public abstract class FormValidation extends IOException implements HttpResponse
                 }
                 // 1x16 spacer needed for IE since it doesn't support min-height
                 return "<div class="+ kind.name().toLowerCase(Locale.ENGLISH) +"><img src='"+
-                        req.getContextPath()+ Jenkins.RESOURCE_PATH+"/images/none.gif' height=16 width=1>"+
+                        req.getContextPath()+ JenkinsImpl.RESOURCE_PATH+"/images/none.gif' height=16 width=1>"+
                         message+"</div>";
             }
             @Override public String toString() {

@@ -30,6 +30,7 @@ import hudson.ExtensionPoint;
 import hudson.cli.declarative.CLIMethod;
 import hudson.ExtensionPoint.LegacyInstancesAreScopedToHudson;
 import hudson.Functions;
+import jenkins.model.JenkinsImpl;
 import jenkins.util.SystemProperties;
 import hudson.cli.declarative.OptionHandlerExtension;
 import jenkins.model.Jenkins;
@@ -367,7 +368,7 @@ public abstract class CLICommand implements ExtensionPoint, Cloneable {
      * @param auth
      *      Always non-null.
      *      If the underlying transport had already performed authentication, this object is something other than
-     *      {@link jenkins.model.Jenkins#ANONYMOUS}.
+     *      {@link JenkinsImpl#ANONYMOUS}.
      * @deprecated Unused.
      */
     @Deprecated
@@ -389,7 +390,7 @@ public abstract class CLICommand implements ExtensionPoint, Cloneable {
      * then this method can return a valid identity of the client.
      *
      * <p>
-     * If the transport doesn't do authentication, this method returns {@link jenkins.model.Jenkins#ANONYMOUS}.
+     * If the transport doesn't do authentication, this method returns {@link JenkinsImpl#ANONYMOUS}.
      */
     public Authentication getTransportAuthentication() {
         Authentication a = transportAuth; 

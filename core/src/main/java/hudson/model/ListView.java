@@ -49,6 +49,7 @@ import javax.annotation.concurrent.GuardedBy;
 import javax.servlet.ServletException;
 import jenkins.model.Jenkins;
 
+import jenkins.model.JenkinsImpl;
 import net.sf.json.JSONObject;
 import org.jenkinsci.Symbol;
 import org.kohsuke.accmod.Restricted;
@@ -484,7 +485,7 @@ public class ListView extends View implements DirectlyModifiableView {
             }
         }
         private void locationChanged(Item item, String oldFullName, String newFullName) {
-            final Jenkins jenkins = Jenkins.getInstance();
+            final JenkinsImpl jenkins = Jenkins.getInstance();
             for (View view: jenkins.getViews()) {
                 if (view instanceof ListView) {
                     renameViewItem(oldFullName, newFullName, jenkins, (ListView) view);
@@ -528,7 +529,7 @@ public class ListView extends View implements DirectlyModifiableView {
             }
         }
         private void deleted(Item item) {
-            final Jenkins jenkins = Jenkins.getInstance();
+            final JenkinsImpl jenkins = Jenkins.getInstance();
             for (View view: jenkins.getViews()) {
                 if (view instanceof ListView) {
                     deleteViewItem(item, jenkins, (ListView) view);

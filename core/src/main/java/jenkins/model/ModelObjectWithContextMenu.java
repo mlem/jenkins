@@ -306,7 +306,7 @@ public interface ModelObjectWithContextMenu extends ModelObject {
          *      String like "gear.png" that resolves to 24x24 stock icon in the core
          */
         public MenuItem withStockIcon(String icon) {
-            this.icon = Stapler.getCurrentRequest().getContextPath() + Jenkins.RESOURCE_PATH + "/images/24x24/"+icon;
+            this.icon = Stapler.getCurrentRequest().getContextPath() + JenkinsImpl.RESOURCE_PATH + "/images/24x24/"+icon;
             return this;
         }
 

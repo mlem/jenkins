@@ -28,6 +28,7 @@ import hudson.ExtensionPoint;
 import jenkins.model.Jenkins;
 import hudson.model.User;
 import hudson.model.UserProperty;
+import jenkins.model.JenkinsImpl;
 import org.acegisecurity.context.SecurityContextHolder;
 import org.acegisecurity.providers.UsernamePasswordAuthenticationToken;
 import org.acegisecurity.userdetails.UserDetails;
@@ -86,7 +87,7 @@ import java.io.Serializable;
  *
  * <h2>URL Binding</h2>
  * <p>
- * Each {@link FederatedLoginService} is exposed to the URL space via {@link jenkins.model.Jenkins#getFederatedLoginService(String)}.
+ * Each {@link FederatedLoginService} is exposed to the URL space via {@link JenkinsImpl#getFederatedLoginService(String)}.
  * So for example if your {@linkplain #getUrlName() url name} is "openid", this object gets
  * "/federatedLoginService/openid" as the URL.
  *

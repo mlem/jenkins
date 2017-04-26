@@ -15,6 +15,7 @@ import java.util.logging.Logger;
 import javax.annotation.Nonnull;
 import javax.servlet.ServletContext;
 import jenkins.model.Jenkins;
+import jenkins.model.JenkinsImpl;
 
 /**
  * A collection of Groovy scripts that are executed as various hooks.
@@ -49,7 +50,7 @@ public class GroovyHookScript {
         this(hook, Jenkins.getActiveInstance());
     }
 
-    private GroovyHookScript(String hook, Jenkins j) {
+    private GroovyHookScript(String hook, JenkinsImpl j) {
         this(hook, j.servletContext, j.getRootDir(), j.getPluginManager().uberClassLoader);
     }
 

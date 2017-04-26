@@ -5,6 +5,7 @@ import javax.inject.Inject;
 import jenkins.model.GlobalConfiguration;
 import jenkins.model.GlobalConfigurationCategory;
 import jenkins.model.Jenkins;
+import jenkins.model.JenkinsImpl;
 import net.sf.json.JSONObject;
 import org.kohsuke.stapler.StaplerRequest;
 
@@ -20,7 +21,7 @@ public class MasterKillSwitchConfiguration extends GlobalConfiguration {
     AdminWhitelistRule rule;
 
     @Inject
-    Jenkins jenkins;
+    JenkinsImpl jenkins;
 
     @Override
     public GlobalConfigurationCategory getCategory() {

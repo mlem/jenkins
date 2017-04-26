@@ -38,6 +38,7 @@ import hudson.model.Computer;
 import hudson.model.EnvironmentSpecific;
 import hudson.model.Node;
 import jenkins.model.Jenkins;
+import jenkins.model.JenkinsImpl;
 import jenkins.mvn.GlobalMavenConfig;
 import jenkins.mvn.GlobalSettingsProvider;
 import jenkins.mvn.SettingsProvider;
@@ -416,7 +417,7 @@ public class Maven extends Builder {
 
     /**
      * @deprecated as of 1.286
-     *      Use {@link jenkins.model.Jenkins#getDescriptorByType(Class)} to obtain the current instance.
+     *      Use {@link JenkinsImpl#getDescriptorByType(Class)} to obtain the current instance.
      *      For compatibility, this field retains the last created {@link DescriptorImpl}.
      *      TODO: fix sonar plugin that depends on this. That's the only plugin that depends on this field.
      */

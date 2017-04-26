@@ -42,7 +42,7 @@ public interface DirectlyModifiableTopLevelItemGroup extends ModifiableTopLevelI
 
     /**
      * Adds an item to this group.
-     * Unlike {@link Jenkins#putItem} this does not try to call {@link Item#delete} on an existing item, nor does it fire {@link ItemListener#onCreated}, nor check permissions.
+     * Unlike {@link JenkinsImpl#putItem} this does not try to call {@link Item#delete} on an existing item, nor does it fire {@link ItemListener#onCreated}, nor check permissions.
      * Normally you would call {@link Item#onLoad} after calling this method (the implementation is not expected to do so).
      * @param <I> the kind of item
      * @param item an item to add which is currently elsewhere

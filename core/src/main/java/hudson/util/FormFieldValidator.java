@@ -45,6 +45,7 @@ import java.util.Locale;
 
 import javax.servlet.ServletException;
 
+import jenkins.model.JenkinsImpl;
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
 import org.acegisecurity.AccessDeniedException;
@@ -231,7 +232,7 @@ public abstract class FormFieldValidator {
             response.setContentType("text/html;charset=UTF-8");
             // 1x16 spacer needed for IE since it doesn't support min-height
             response.getWriter().print("<div class="+ cssClass +"><img src='"+
-                    request.getContextPath()+ Jenkins.RESOURCE_PATH+"/images/none.gif' height=16 width=1>"+
+                    request.getContextPath()+ JenkinsImpl.RESOURCE_PATH+"/images/none.gif' height=16 width=1>"+
                     message+"</div>");
         }
     }

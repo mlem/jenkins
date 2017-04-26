@@ -43,6 +43,7 @@ import hudson.util.IOUtils;
 import hudson.util.Secret;
 import jenkins.model.DirectlyModifiableTopLevelItemGroup;
 import jenkins.model.Jenkins;
+import jenkins.model.JenkinsImpl;
 import jenkins.security.NotReallyRoleSensitiveCallable;
 import jenkins.util.xml.XMLUtils;
 
@@ -189,7 +190,7 @@ public abstract class AbstractItem extends Actionable implements Item, HttpDelet
     /**
      * This bridge method is to maintain binary compatibility with {@link TopLevelItem#getParent()}.
      */
-    @WithBridgeMethods(value=Jenkins.class,castRequired=true)
+    @WithBridgeMethods(value=JenkinsImpl.class,castRequired=true)
     @Override public @Nonnull ItemGroup getParent() {
         if (parent == null) {
             throw new IllegalStateException("no parent set on " + getClass().getName() + "[" + name + "]");

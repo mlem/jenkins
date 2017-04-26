@@ -23,13 +23,12 @@
  */
 package hudson;
 
-import jenkins.model.Jenkins;
-
 import static java.lang.annotation.ElementType.TYPE;
 import java.lang.annotation.Retention;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 import java.lang.annotation.Target;
-import jenkins.util.io.OnMaster;
+
+import jenkins.model.JenkinsImpl;
 
 /**
  * Marker interface that designates extensible components
@@ -51,7 +50,7 @@ import jenkins.util.io.OnMaster;
 public interface ExtensionPoint {
     /**
      * Used by designers of extension points (direct subtypes of {@link ExtensionPoint}) to indicate that
-     * the legacy instances are scoped to {@link Jenkins} instance. By default, legacy instances are
+     * the legacy instances are scoped to {@link JenkinsImpl} instance. By default, legacy instances are
      * static scope.  
      */
     @Target(TYPE)

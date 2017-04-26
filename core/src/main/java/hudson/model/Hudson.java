@@ -36,6 +36,7 @@ import hudson.util.CopyOnWriteList;
 import hudson.util.FormValidation;
 import javax.annotation.Nonnull;
 import jenkins.model.Jenkins;
+import jenkins.model.JenkinsImpl;
 import org.jvnet.hudson.reactor.ReactorException;
 import org.kohsuke.stapler.QueryParameter;
 import org.kohsuke.stapler.Stapler;
@@ -51,9 +52,8 @@ import java.text.ParseException;
 import java.util.List;
 
 import static hudson.Util.fixEmpty;
-import javax.annotation.CheckForNull;
 
-public class Hudson extends Jenkins {
+public class Hudson extends JenkinsImpl {
 
     /**
      * List of registered {@link hudson.model.listeners.ItemListener}s.
@@ -69,7 +69,7 @@ public class Hudson extends Jenkins {
     @Deprecated
     private transient final CopyOnWriteList<ComputerListener> computerListeners = ExtensionListView.createCopyOnWriteList(ComputerListener.class);
 
-    /** @deprecated Here only for compatibility. Use {@link Jenkins#getInstance} instead. */
+    /** @deprecated Here only for compatibility. Use {@link JenkinsImpl#getInstance} instead. */
     @Deprecated
     @CLIResolver
     @Nonnull
@@ -325,7 +325,7 @@ public class Hudson extends Jenkins {
      * @deprecated  only here for backward comp
      */
     @Deprecated
-    public static final class MasterComputer extends Jenkins.MasterComputer {
+    public static final class MasterComputer extends JenkinsImpl.MasterComputer {
         // no op
     }
 
@@ -333,8 +333,8 @@ public class Hudson extends Jenkins {
      * @deprecated  only here for backward comp
      */
     @Deprecated
-    public static class CloudList extends Jenkins.CloudList {
-        public CloudList(Jenkins h) {
+    public static class CloudList extends JenkinsImpl.CloudList {
+        public CloudList(JenkinsImpl h) {
             super(h);
         }
 

@@ -37,6 +37,7 @@ import hudson.security.captcha.CaptchaSupport;
 import hudson.util.DescriptorList;
 import hudson.util.PluginServletFilter;
 import hudson.util.spring.BeanBuilder;
+import jenkins.model.JenkinsImpl;
 import org.acegisecurity.Authentication;
 import org.acegisecurity.AuthenticationManager;
 import org.acegisecurity.GrantedAuthorityImpl;
@@ -76,7 +77,7 @@ import java.util.logging.Logger;
  * <p>
  * If additional views/URLs need to be exposed,
  * an active {@link SecurityRealm} is bound to <tt>CONTEXT_ROOT/securityRealm/</tt>
- * through {@link jenkins.model.Jenkins#getSecurityRealm()}, so you can define additional pages and
+ * through {@link JenkinsImpl#getSecurityRealm()}, so you can define additional pages and
  * operations on your {@link SecurityRealm}.
  *
  * <h2>How do I implement this class?</h2>
@@ -188,7 +189,7 @@ public abstract class SecurityRealm extends AbstractDescribableImpl<SecurityReal
      *      The command about to be executed.
      * @return
      *      never null. By default, this method returns a no-op authenticator that always authenticates
-     *      the session as authenticated by the transport (which is often just {@link jenkins.model.Jenkins#ANONYMOUS}.)
+     *      the session as authenticated by the transport (which is often just {@link JenkinsImpl#ANONYMOUS}.)
      * @deprecated See {@link CliAuthenticator}.
      */
     @Deprecated

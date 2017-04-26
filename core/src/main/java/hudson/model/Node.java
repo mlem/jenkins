@@ -61,6 +61,7 @@ import java.util.logging.Logger;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
 import jenkins.model.Jenkins;
+import jenkins.model.JenkinsImpl;
 import jenkins.util.io.OnMaster;
 import net.sf.json.JSONObject;
 import org.acegisecurity.Authentication;
@@ -75,7 +76,7 @@ import org.kohsuke.stapler.export.ExportedBean;
  * Base type of Jenkins agents (although in practice, you probably extend {@link Slave} to define a new agent type).
  *
  * <p>
- * As a special case, {@link Jenkins} extends from here.
+ * As a special case, {@link JenkinsImpl} extends from here.
  *
  * <p>
  * Nodes are persisted objects that capture user configurations, and instances get thrown away and recreated whenever
@@ -214,7 +215,7 @@ public abstract class Node extends AbstractModelObject implements Reconfigurable
 
     /**
      * Creates a new {@link Computer} object that acts as the UI peer of this {@link Node}.
-     * Nobody but {@link Jenkins#updateComputerList()} should call this method.
+     * Nobody but {@link JenkinsImpl#updateComputerList()} should call this method.
      */
     protected abstract Computer createComputer();
 
@@ -377,7 +378,7 @@ public abstract class Node extends AbstractModelObject implements Reconfigurable
         if(l==null && getMode()== Mode.EXCLUSIVE) {
             // flyweight tasks need to get executed somewhere, if every node
             if (!(item.task instanceof Queue.FlyweightTask && (
-                    this instanceof Jenkins
+                    this instanceof JenkinsImpl
                             || Jenkins.getInstance().getNumExecutors() < 1
                             || Jenkins.getInstance().getMode() == Mode.EXCLUSIVE)
             )) {

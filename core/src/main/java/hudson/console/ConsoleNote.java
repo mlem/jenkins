@@ -32,6 +32,7 @@ import hudson.model.Run;
 import hudson.remoting.ObjectInputStreamEx;
 import hudson.util.IOUtils;
 import hudson.util.UnbufferedBase64InputStream;
+import jenkins.model.JenkinsImpl;
 import org.apache.commons.codec.binary.Base64OutputStream;
 import org.apache.commons.io.output.ByteArrayOutputStream;
 import org.apache.tools.ant.BuildListener;
@@ -253,7 +254,7 @@ public abstract class ConsoleNote<T> implements Serializable, Describable<Consol
                 throw new IOException("MAC mismatch");
             }
 
-            Jenkins jenkins = Jenkins.getInstance();
+            JenkinsImpl jenkins = Jenkins.getInstance();
             try (ObjectInputStream ois = new ObjectInputStreamEx(new GZIPInputStream(new ByteArrayInputStream(buf)),
                     jenkins != null ? jenkins.pluginManager.uberClassLoader : ConsoleNote.class.getClassLoader(),
                     ClassFilter.DEFAULT)) {

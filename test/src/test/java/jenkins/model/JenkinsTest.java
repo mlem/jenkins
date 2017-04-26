@@ -124,7 +124,7 @@ public class JenkinsTest {
         FreeStyleProject p = j.createFreeStyleProject(jobName);
         p.setDisplayName("displayName");
         
-        Jenkins jenkins = Jenkins.getInstance();
+        JenkinsImpl jenkins = Jenkins.getInstance();
         assertTrue(jenkins.isDisplayNameUnique("displayName1", curJobName));
         assertTrue(jenkins.isDisplayNameUnique(jobName, curJobName));
     }
@@ -141,7 +141,7 @@ public class JenkinsTest {
         FreeStyleProject p = j.createFreeStyleProject(jobName);
         p.setDisplayName(displayName);
         
-        Jenkins jenkins = Jenkins.getInstance();
+        JenkinsImpl jenkins = Jenkins.getInstance();
         assertFalse(jenkins.isDisplayNameUnique(displayName, curJobName));
     }
     
@@ -153,7 +153,7 @@ public class JenkinsTest {
         FreeStyleProject curProject = j.createFreeStyleProject(curJobName);
         curProject.setDisplayName(displayName);
         
-        Jenkins jenkins = Jenkins.getInstance();
+        JenkinsImpl jenkins = Jenkins.getInstance();
         // should be true as we don't test against the current job
         assertTrue(jenkins.isDisplayNameUnique(displayName, curJobName));
     }
@@ -165,7 +165,7 @@ public class JenkinsTest {
         j.createFreeStyleProject(curJobName);
         j.createFreeStyleProject(jobName);
         
-        Jenkins jenkins = Jenkins.getInstance();
+        JenkinsImpl jenkins = Jenkins.getInstance();
         assertTrue(jenkins.isNameUnique("jobName1", curJobName));
     }
 
@@ -176,7 +176,7 @@ public class JenkinsTest {
         j.createFreeStyleProject(curJobName);
         j.createFreeStyleProject(jobName);
         
-        Jenkins jenkins = Jenkins.getInstance();
+        JenkinsImpl jenkins = Jenkins.getInstance();
         assertFalse(jenkins.isNameUnique(jobName, curJobName));
     }
 
@@ -187,7 +187,7 @@ public class JenkinsTest {
         j.createFreeStyleProject(curJobName);
         j.createFreeStyleProject(jobName);
         
-        Jenkins jenkins = Jenkins.getInstance();
+        JenkinsImpl jenkins = Jenkins.getInstance();
         // true because we don't test against the current job
         assertTrue(jenkins.isNameUnique(curJobName, curJobName));
     }

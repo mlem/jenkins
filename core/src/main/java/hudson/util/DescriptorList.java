@@ -29,6 +29,7 @@ import hudson.model.Describable;
 import hudson.model.Descriptor;
 import hudson.model.Descriptor.FormException;
 import jenkins.model.Jenkins;
+import jenkins.model.JenkinsImpl;
 import net.sf.json.JSONObject;
 import org.kohsuke.stapler.Stapler;
 
@@ -53,7 +54,7 @@ import javax.annotation.CheckForNull;
  *
  * <p>
  * The other mode is the new mode, where the {@link Descriptor}s are actually stored in {@link ExtensionList}
- * (see {@link jenkins.model.Jenkins#getDescriptorList(Class)}) and this class acts as a view to it. This enables
+ * (see {@link JenkinsImpl#getDescriptorList(Class)}) and this class acts as a view to it. This enables
  * bi-directional interoperability &mdash; both descriptors registered automatically and descriptors registered
  * manually are visible from both {@link DescriptorList} and {@link ExtensionList}. In this mode,
  * {@link #legacy} is null but {@link #type} is non-null.

@@ -30,7 +30,8 @@ import java.util.Locale;
 import javax.annotation.Nonnull;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletResponse;
-import jenkins.model.Jenkins;
+
+import jenkins.model.JenkinsImpl;
 import org.kohsuke.stapler.HttpResponse;
 import org.kohsuke.stapler.Stapler;
 import org.kohsuke.stapler.StaplerRequest;
@@ -137,7 +138,7 @@ public abstract class FormFillFailure extends IOException implements HttpRespons
                 }
                 // 1x16 spacer needed for IE since it doesn't support min-height
                 return "<div class=" + getKind().name().toLowerCase(Locale.ENGLISH) + "><img src='" +
-                        req.getContextPath() + Jenkins.RESOURCE_PATH + "/images/none.gif' height=16 width=1>" +
+                        req.getContextPath() + JenkinsImpl.RESOURCE_PATH + "/images/none.gif' height=16 width=1>" +
                         message + "</div>";
             }
 

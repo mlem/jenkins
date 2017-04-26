@@ -1,5 +1,6 @@
 package jenkins;
 
+import jenkins.model.JenkinsImpl;
 import jenkins.util.SystemProperties;
 import hudson.init.InitMilestone;
 import hudson.init.InitReactorListener;
@@ -7,7 +8,6 @@ import hudson.util.DaemonThreadFactory;
 import hudson.util.NamingThreadFactory;
 import hudson.util.Service;
 import jenkins.model.Configuration;
-import jenkins.model.Jenkins;
 import org.jvnet.hudson.reactor.Milestone;
 import org.jvnet.hudson.reactor.Reactor;
 import org.jvnet.hudson.reactor.ReactorException;
@@ -38,7 +38,7 @@ public class InitReactorRunner {
          reactor.addAll(InitMilestone.ordering().discoverTasks(reactor));
 
         ExecutorService es;
-        if (Jenkins.PARALLEL_LOAD)
+        if (JenkinsImpl.PARALLEL_LOAD)
             es = new ThreadPoolExecutor(
                 TWICE_CPU_NUM, TWICE_CPU_NUM, 5L, TimeUnit.SECONDS, new LinkedBlockingQueue<Runnable>(), new DaemonThreadFactory());
         else

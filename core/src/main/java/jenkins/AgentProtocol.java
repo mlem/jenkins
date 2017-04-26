@@ -8,7 +8,8 @@ import hudson.TcpSlaveAgentListener;
 import java.io.IOException;
 import java.net.Socket;
 import java.util.Set;
-import jenkins.model.Jenkins;
+
+import jenkins.model.JenkinsImpl;
 
 /**
  * Pluggable Jenkins TCP agent protocol handler called from {@link TcpSlaveAgentListener}.
@@ -25,7 +26,7 @@ import jenkins.model.Jenkins;
 public abstract class AgentProtocol implements ExtensionPoint {
     /**
      * Allow experimental {@link AgentProtocol} implementations to declare being opt-in.
-     * Note that {@link Jenkins#setAgentProtocols(Set)} only records the protocols where the admin has made a
+     * Note that {@link JenkinsImpl#setAgentProtocols(Set)} only records the protocols where the admin has made a
      * conscious decision thus:
      * <ul>
      *     <li>if a protocol is opt-in, it records the admin enabling it</li>
@@ -38,7 +39,7 @@ public abstract class AgentProtocol implements ExtensionPoint {
      *
      * @return {@code true} if the protocol requires explicit opt-in.
      * @since 2.16
-     * @see Jenkins#setAgentProtocols(Set)
+     * @see JenkinsImpl#setAgentProtocols(Set)
      */
     public boolean isOptIn() {
         return false;

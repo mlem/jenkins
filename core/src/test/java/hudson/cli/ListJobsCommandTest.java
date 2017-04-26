@@ -23,6 +23,7 @@ import java.util.List;
 
 
 import jenkins.model.Jenkins;
+import jenkins.model.JenkinsImpl;
 import jenkins.model.ModifiableTopLevelItemGroup;
 
 import org.hamcrest.Description;
@@ -36,7 +37,7 @@ import org.powermock.core.classloader.annotations.SuppressStaticInitializationFo
 import org.powermock.modules.junit4.PowerMockRunner;
 
 @RunWith(PowerMockRunner.class)
-@PrepareForTest(Jenkins.class)
+@PrepareForTest(JenkinsImpl.class)
 @SuppressStaticInitializationFor("hudson.cli.CLICommand")
 public class ListJobsCommandTest {
 
@@ -48,8 +49,8 @@ public class ListJobsCommandTest {
     @Before
     public void setUp() {
 
-        jenkins = mock(Jenkins.class);
-        mockStatic(Jenkins.class);
+        jenkins = mock(JenkinsImpl.class);
+        mockStatic(JenkinsImpl.class);
         when(Jenkins.getInstance()).thenReturn(jenkins);
         when(Jenkins.getActiveInstance()).thenReturn(jenkins);
         command = mock(ListJobsCommand.class, Mockito.CALLS_REAL_METHODS);

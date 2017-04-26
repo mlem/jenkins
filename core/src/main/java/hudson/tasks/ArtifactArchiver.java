@@ -30,6 +30,7 @@ import hudson.Launcher;
 import hudson.Util;
 import hudson.Extension;
 import hudson.Functions;
+import jenkins.model.JenkinsImpl;
 import jenkins.util.SystemProperties;
 import hudson.model.AbstractProject;
 import hudson.model.Result;
@@ -308,7 +309,7 @@ public class ArtifactArchiver extends Recorder implements SimpleBuildStep {
     /**
      * @deprecated as of 1.286
      *      Some plugin depends on this, so this field is left here and points to the last created instance.
-     *      Use {@link jenkins.model.Jenkins#getDescriptorByType(Class)} instead.
+     *      Use {@link JenkinsImpl#getDescriptorByType(Class)} instead.
      */
     @Deprecated
     public static volatile DescriptorImpl DESCRIPTOR;

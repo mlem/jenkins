@@ -25,7 +25,7 @@ package hudson.util
 
 import hudson.model.Computer
 import jenkins.util.Timer
-import jenkins.model.Jenkins
+import jenkins.model.JenkinsImpl
 import hudson.model.Label
 import hudson.model.Queue.BlockedItem
 import hudson.model.Queue.BuildableItem
@@ -50,7 +50,7 @@ public class LoadMonitorImpl extends SafeTimerTask {
 
     public LoadMonitorImpl(File dataFile) {
         this.dataFile = dataFile;
-        labels = Jenkins.getInstance().labels*.name;
+        labels = JenkinsImpl.getInstance().labels*.name;
         printHeaders();
         Timer.get().scheduleAtFixedRate(this,0,10*1000, TimeUnit.MILLISECONDS);
     }
@@ -75,7 +75,7 @@ public class LoadMonitorImpl extends SafeTimerTask {
         def data = [];
         data.add(quote(FORMATTER.format(now)));
 
-        def h = Jenkins.getInstance();
+        def h = JenkinsImpl.getInstance();
 
         def items = h.queue.items;
         def filterByType = {Class type -> items.findAll { type.isInstance(it) } }

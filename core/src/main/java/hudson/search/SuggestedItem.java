@@ -25,6 +25,7 @@ package hudson.search;
 
 import hudson.model.Item;
 import hudson.model.ItemGroup;
+import jenkins.model.JenkinsImpl;
 
 /**
  * One item of a search result.
@@ -91,7 +92,7 @@ public class SuggestedItem {
     /**
      * Given a SearchItem, builds a SuggestedItem hierarchy by looking up parent items (if applicable).
      * This allows search results for items not contained within the same {@link ItemGroup} to be distinguished.
-     * If provided searchContext is null, results will be interpreted from the root {@link jenkins.model.Jenkins} object
+     * If provided searchContext is null, results will be interpreted from the root {@link JenkinsImpl} object
      * @since 1.527
      */
     public static SuggestedItem build(SearchableModelObject searchContext, SearchItem si) {

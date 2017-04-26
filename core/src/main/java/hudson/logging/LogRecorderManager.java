@@ -31,6 +31,7 @@ import hudson.model.AbstractModelObject;
 import jenkins.model.Jenkins;
 import hudson.model.RSS;
 import hudson.util.CopyOnWriteMap;
+import jenkins.model.JenkinsImpl;
 import jenkins.model.JenkinsLocationConfiguration;
 import jenkins.model.ModelObjectWithChildren;
 import jenkins.model.ModelObjectWithContextMenu.ContextMenu;
@@ -145,7 +146,7 @@ public class LogRecorderManager extends AbstractModelObject implements ModelObje
      * RSS feed for log entries.
      */
     public void doRss( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException {
-        doRss(req, rsp, Jenkins.logRecords);
+        doRss(req, rsp, JenkinsImpl.logRecords);
     }
 
     /**

@@ -25,6 +25,7 @@ package hudson.model;
 
 import hudson.ExtensionList;
 import jenkins.model.Jenkins;
+import jenkins.model.JenkinsImpl;
 import jenkins.model.item_category.ItemCategory;
 import org.acegisecurity.AccessDeniedException;
 import org.apache.commons.jelly.Script;
@@ -237,9 +238,9 @@ public abstract class TopLevelItemDescriptor extends Descriptor<TopLevelItem> im
                 // this one is easy... too easy... also will never happen
                 return IconSet.toNormalizedIconNameClass(path);
             }
-            if (Jenkins.RESOURCE_PATH.length() > 0 && path.startsWith(Jenkins.RESOURCE_PATH)) {
+            if (JenkinsImpl.RESOURCE_PATH.length() > 0 && path.startsWith(JenkinsImpl.RESOURCE_PATH)) {
                 // will to live falling
-                path = path.substring(Jenkins.RESOURCE_PATH.length());
+                path = path.substring(JenkinsImpl.RESOURCE_PATH.length());
             }
             Icon icon = IconSet.icons.getIconByUrl(path);
             if (icon != null) {

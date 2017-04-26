@@ -33,6 +33,7 @@ import java.util.Set;
 import java.io.IOException;
 
 import jenkins.model.Jenkins;
+import jenkins.model.JenkinsImpl;
 import org.kohsuke.accmod.Restricted;
 import org.kohsuke.accmod.restrictions.NoExternalUse;
 import org.kohsuke.stapler.StaplerProxy;
@@ -57,7 +58,7 @@ import org.kohsuke.stapler.interceptor.RequirePOST;
  * so by running some code periodically (for this, use {@link TimerTrigger#timer})
  *
  * <p>
- * {@link AdministrativeMonitor}s are bound to URL by {@link Jenkins#getAdministrativeMonitor(String)}.
+ * {@link AdministrativeMonitor}s are bound to URL by {@link JenkinsImpl#getAdministrativeMonitor(String)}.
  * See {@link #getUrl()}.
  *
  * <h3>Views</h3>
@@ -75,7 +76,7 @@ import org.kohsuke.stapler.interceptor.RequirePOST;
  *
  * @author Kohsuke Kawaguchi
  * @since 1.273
- * @see Jenkins#administrativeMonitors
+ * @see JenkinsImpl#administrativeMonitors
  */
 @LegacyInstancesAreScopedToHudson
 public abstract class AdministrativeMonitor extends AbstractModelObject implements ExtensionPoint, StaplerProxy {

@@ -26,7 +26,7 @@ package hudson.model;
 import com.thoughtworks.xstream.converters.UnmarshallingContext;
 import hudson.diagnosis.OldDataMonitor;
 import hudson.util.XStream2;
-import jenkins.model.Jenkins;
+import jenkins.model.JenkinsImpl;
 import jenkins.util.NonLocalizable;
 import org.jvnet.localizer.Localizable;
 import org.kohsuke.stapler.export.Exported;
@@ -250,12 +250,12 @@ public class HealthReport implements Serializable, Comparable<HealthReport> {
      */
     public String getIconUrl(String size) {
         if (iconUrl == null) {
-            return Jenkins.RESOURCE_PATH + "/images/" + size + "/" + HEALTH_UNKNOWN_IMG;
+            return JenkinsImpl.RESOURCE_PATH + "/images/" + size + "/" + HEALTH_UNKNOWN_IMG;
         }
         if (iconUrl.startsWith("/")) {
             return iconUrl.replace("/32x32/", "/" + size + "/");
         }
-        return Jenkins.RESOURCE_PATH + "/images/" + size + "/" + iconUrl;
+        return JenkinsImpl.RESOURCE_PATH + "/images/" + size + "/" + iconUrl;
     }
 
     /**

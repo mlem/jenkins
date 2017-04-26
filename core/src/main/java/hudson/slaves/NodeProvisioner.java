@@ -31,6 +31,7 @@ import jenkins.model.Jenkins;
 import static hudson.model.LoadStatistics.DECAY;
 import hudson.model.MultiStageTimeSeries.TimeScale;
 import hudson.Extension;
+import jenkins.model.JenkinsImpl;
 import jenkins.util.SystemProperties;
 import org.jenkinsci.Symbol;
 
@@ -803,7 +804,7 @@ public class NodeProvisioner {
 
         @Override
         protected void doRun() {
-            Jenkins h = Jenkins.getInstance();
+            JenkinsImpl h = Jenkins.getInstance();
             h.unlabeledNodeProvisioner.update();
             for( Label l : h.getLabels() )
                 l.nodeProvisioner.update();

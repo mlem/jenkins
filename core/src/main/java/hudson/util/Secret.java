@@ -30,9 +30,10 @@ import com.thoughtworks.xstream.converters.UnmarshallingContext;
 import com.thoughtworks.xstream.io.HierarchicalStreamReader;
 import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
 import com.trilead.ssh2.crypto.Base64;
+import jenkins.model.JenkinsImpl;
 import jenkins.util.SystemProperties;
 import java.util.Arrays;
-import jenkins.model.Jenkins;
+
 import hudson.Util;
 import jenkins.security.CryptoConfidentialKey;
 import org.kohsuke.stapler.Stapler;
@@ -276,7 +277,7 @@ public final class Secret implements Serializable {
     private static final String PROVIDER = SystemProperties.getString(Secret.class.getName()+".provider");
 
     /**
-     * For testing only. Override the secret key so that we can test this class without {@link Jenkins}.
+     * For testing only. Override the secret key so that we can test this class without {@link JenkinsImpl}.
      */
     /*package*/ static String SECRET = null;
 

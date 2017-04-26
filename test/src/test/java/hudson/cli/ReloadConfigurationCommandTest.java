@@ -31,6 +31,7 @@ import hudson.model.Node;
 import hudson.model.User;
 import hudson.tasks.Mailer;
 import jenkins.model.Jenkins;
+import jenkins.model.JenkinsImpl;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Rule;
@@ -176,7 +177,7 @@ public class ReloadConfigurationCommandTest {
 
         // reload-configuration is performed in a separate thread
         // we have to wait until it finishes
-        while (!(j.jenkins.servletContext.getAttribute("app") instanceof Jenkins)) {
+        while (!(j.jenkins.servletContext.getAttribute("app") instanceof JenkinsImpl)) {
             System.out.println("Jenkins reload operation is performing, sleeping 1s...");
             Thread.sleep(1000);
         }

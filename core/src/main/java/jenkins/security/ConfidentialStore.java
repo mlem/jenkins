@@ -5,6 +5,7 @@ import hudson.Lookup;
 import hudson.util.Secret;
 import hudson.util.Service;
 import jenkins.model.Jenkins;
+import jenkins.model.JenkinsImpl;
 import org.kohsuke.MetaInfServices;
 
 import javax.annotation.CheckForNull;
@@ -61,7 +62,7 @@ public abstract class ConfidentialStore {
     public static @Nonnull ConfidentialStore get() {
         if (TEST!=null) return TEST.get();
 
-        Jenkins j = Jenkins.getInstance();
+        JenkinsImpl j = Jenkins.getInstance();
         Lookup lookup = j.lookup;
         ConfidentialStore cs = lookup.get(ConfidentialStore.class);
         if (cs==null) {
@@ -88,7 +89,7 @@ public abstract class ConfidentialStore {
     }
 
     /**
-     * Testing only. Used for testing {@link ConfidentialKey} without {@link Jenkins}
+     * Testing only. Used for testing {@link ConfidentialKey} without {@link JenkinsImpl}
      */
     /*package*/ static ThreadLocal<ConfidentialStore> TEST = null;
 

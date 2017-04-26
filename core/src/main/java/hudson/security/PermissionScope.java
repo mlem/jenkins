@@ -32,7 +32,7 @@ import hudson.model.Job;
 import hudson.model.ModelObject;
 import hudson.model.Node;
 import hudson.model.Run;
-import jenkins.model.Jenkins;
+import jenkins.model.JenkinsImpl;
 
 import java.util.Set;
 
@@ -62,8 +62,8 @@ public final class PermissionScope {
 
     /**
      * Other bigger scopes that this scope divides. For example, permissions scoped to {@link ItemGroup}
-     * should be automatically configurable at {@link Jenkins} level, and in situations like this,
-     * we say {@link ItemGroup} permission scope is contained in the {@link Jenkins} permission scope.
+     * should be automatically configurable at {@link JenkinsImpl} level, and in situations like this,
+     * we say {@link ItemGroup} permission scope is contained in the {@link JenkinsImpl} permission scope.
      */
     private final Set<PermissionScope> containers;
 
@@ -94,7 +94,7 @@ public final class PermissionScope {
     /**
      * Permissions scoped to the entire Jenkins instance.
      */
-    public static final PermissionScope JENKINS = new PermissionScope(Jenkins.class);
+    public static final PermissionScope JENKINS = new PermissionScope(JenkinsImpl.class);
 
     /**
      * Permissions scoped to containers of {@link Item}s.

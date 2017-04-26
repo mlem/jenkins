@@ -28,17 +28,14 @@ import hudson.Functions;
 import hudson.diagnosis.ReverseProxySetupMonitor;
 import hudson.model.AdministrativeMonitor;
 import hudson.model.PageDecorator;
-import hudson.util.HttpResponses;
 import hudson.util.HudsonIsLoading;
 import hudson.util.HudsonIsRestarting;
 import jenkins.diagnostics.URICheckEncodingMonitor;
 import jenkins.model.Jenkins;
-import net.sf.json.JSON;
-import net.sf.json.JSONObject;
+import jenkins.model.JenkinsImpl;
 import org.kohsuke.accmod.Restricted;
 import org.kohsuke.accmod.restrictions.NoExternalUse;
 import org.kohsuke.stapler.Ancestor;
-import org.kohsuke.stapler.HttpResponse;
 import org.kohsuke.stapler.Stapler;
 import org.kohsuke.stapler.StaplerRequest;
 
@@ -131,7 +128,7 @@ public class AdministrativeMonitorsDecorator extends PageDecorator {
         }
 
         // don't show for some URLs served directly by Jenkins
-        if (o instanceof Jenkins) {
+        if (o instanceof JenkinsImpl) {
             String url = a.getRestOfUrl();
 
             if (ignoredJenkinsRestOfUrls.contains(url)) {

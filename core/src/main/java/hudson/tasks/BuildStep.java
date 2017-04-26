@@ -46,6 +46,8 @@ import java.util.List;
 import java.util.AbstractList;
 import java.util.Iterator;
 import java.util.WeakHashMap;
+
+import jenkins.model.JenkinsImpl;
 import jenkins.security.QueueItemAuthenticator;
 import org.acegisecurity.Authentication;
 
@@ -259,7 +261,7 @@ public interface BuildStep {
     final class PublisherList extends AbstractList<Descriptor<Publisher>> {
         /**
          * {@link Descriptor}s are actually stored in here.
-         * Since {@link PublisherList} lives longer than {@link jenkins.model.Jenkins} we cannot directly use {@link ExtensionList}.
+         * Since {@link PublisherList} lives longer than {@link JenkinsImpl} we cannot directly use {@link ExtensionList}.
          */
         private final DescriptorList<Publisher> core = new DescriptorList<Publisher>(Publisher.class);
 

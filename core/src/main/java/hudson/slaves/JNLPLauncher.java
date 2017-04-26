@@ -31,6 +31,7 @@ import hudson.model.TaskListener;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
 import jenkins.model.Jenkins;
+import jenkins.model.JenkinsImpl;
 import org.jenkinsci.Symbol;
 import org.kohsuke.stapler.DataBoundConstructor;
 
@@ -82,7 +83,7 @@ public class JNLPLauncher extends ComputerLauncher {
 
     /**
      * @deprecated as of 1.XXX
-     *      Use {@link Jenkins#getDescriptor(Class)}
+     *      Use {@link JenkinsImpl#getDescriptor(Class)}
      */
     public static /*almost final*/ Descriptor<ComputerLauncher> DESCRIPTOR;
 

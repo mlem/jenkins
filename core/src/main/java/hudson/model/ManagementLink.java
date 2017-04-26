@@ -28,9 +28,10 @@ import hudson.ExtensionListView;
 import hudson.Extension;
 import hudson.ExtensionList;
 import hudson.security.Permission;
-import jenkins.model.Jenkins;
 
 import java.util.List;
+
+import jenkins.model.JenkinsImpl;
 import org.kohsuke.stapler.interceptor.RequirePOST;
 
 import javax.annotation.CheckForNull;
@@ -42,7 +43,7 @@ import javax.annotation.Nonnull;
  * <p>
  * This is a place for exposing features that are only meant for system admins
  * (whereas features that are meant for Hudson users at large should probably
- * be added to {@link Jenkins#getActions()}.)
+ * be added to {@link JenkinsImpl#getActions()}.)
  *
  * <p>
  * To register a new instance, put {@link Extension} on your implementation class.
@@ -80,7 +81,7 @@ public abstract class ManagementLink implements ExtensionPoint, Action {
      *
      * <p>
      * In case of {@link ManagementLink}, this value is put straight into the href attribute,
-     * so relative paths are interpreted against the root {@link Jenkins} object.
+     * so relative paths are interpreted against the root {@link JenkinsImpl} object.
      */
     @Override
     public abstract @CheckForNull String getUrlName();
@@ -112,7 +113,7 @@ public abstract class ManagementLink implements ExtensionPoint, Action {
     }
 
     /**
-     * @return permission required for user to access this management link, in addition to {@link Jenkins#ADMINISTER}
+     * @return permission required for user to access this management link, in addition to {@link JenkinsImpl#ADMINISTER}
      */
     public @CheckForNull Permission getRequiredPermission() {
         return null;

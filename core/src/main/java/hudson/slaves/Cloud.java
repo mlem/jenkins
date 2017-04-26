@@ -40,6 +40,7 @@ import hudson.security.ACL;
 import hudson.security.AccessControlled;
 import hudson.security.Permission;
 import hudson.util.DescriptorList;
+import jenkins.model.JenkinsImpl;
 import org.kohsuke.stapler.DataBoundConstructor;
 
 import java.util.Collection;
@@ -86,7 +87,7 @@ import java.util.concurrent.Future;
 public abstract class Cloud extends AbstractModelObject implements ExtensionPoint, Describable<Cloud>, AccessControlled {
 
     /**
-     * Uniquely identifies this {@link Cloud} instance among other instances in {@link jenkins.model.Jenkins#clouds}.
+     * Uniquely identifies this {@link Cloud} instance among other instances in {@link JenkinsImpl#clouds}.
      *
      * This is expected to be short ID-like string that does not contain any character unsafe as variable name or
      * URL path token.
@@ -145,7 +146,7 @@ public abstract class Cloud extends AbstractModelObject implements ExtensionPoin
      *      {@link PlannedNode}s that represent asynchronous {@link Node}
      *      provisioning operations. Can be empty but must not be null.
      *      {@link NodeProvisioner} will be responsible for adding the resulting {@link Node}s
-     *      into Hudson via {@link jenkins.model.Jenkins#addNode(Node)}, so a {@link Cloud} implementation
+     *      into Hudson via {@link JenkinsImpl#addNode(Node)}, so a {@link Cloud} implementation
      *      just needs to return {@link PlannedNode}s that each contain an object that implements {@link Future}.
      *      When the {@link Future} has completed its work, {@link Future#get} will be called to obtain the
      *      provisioned {@link Node} object.

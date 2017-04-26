@@ -27,6 +27,7 @@ import hudson.model.MultiStageTimeSeries.TimeScale;
 import hudson.model.MultiStageTimeSeries.TrendChart;
 import hudson.model.queue.SubTask;
 import jenkins.model.Jenkins;
+import jenkins.model.JenkinsImpl;
 import org.kohsuke.accmod.Restricted;
 import org.kohsuke.accmod.restrictions.NoExternalUse;
 import org.kohsuke.stapler.export.Exported;
@@ -36,7 +37,7 @@ import org.kohsuke.stapler.export.Exported;
  * and all the jobs that are running on it.
  *
  * @author Kohsuke Kawaguchi
- * @see Jenkins#overallLoad
+ * @see JenkinsImpl#overallLoad
  * @see jenkins.model.UnlabeledLoadStatistics
  */
 public class OverallLoadStatistics extends LoadStatistics {

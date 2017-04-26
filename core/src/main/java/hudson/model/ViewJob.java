@@ -23,6 +23,7 @@
  */
 package hudson.model;
 
+import jenkins.model.JenkinsImpl;
 import jenkins.util.SystemProperties;
 import hudson.model.Descriptor.FormException;
 import java.io.IOException;
@@ -81,7 +82,7 @@ public abstract class ViewJob<JobT extends ViewJob<JobT,RunT>, RunT extends Run<
      * @deprecated as of 1.390
      */
     @Deprecated
-    protected ViewJob(Jenkins parent, String name) {
+    protected ViewJob(JenkinsImpl parent, String name) {
         super(parent,name);
     }
 

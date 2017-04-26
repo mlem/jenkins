@@ -27,6 +27,7 @@ package hudson.util;
 import com.trilead.ssh2.crypto.Base64;
 import hudson.Util;
 import jenkins.model.Jenkins;
+import jenkins.model.JenkinsImpl;
 import jenkins.security.CryptoConfidentialKey;
 import org.kohsuke.accmod.Restricted;
 import org.kohsuke.accmod.restrictions.NoExternalUse;
@@ -67,7 +68,7 @@ public class HistoricalSecrets {
     }
 
     /**
-     * Turns {@link Jenkins#getSecretKey()} into an AES key.
+     * Turns {@link JenkinsImpl#getSecretKey()} into an AES key.
      *
      * @deprecated
      * This is no longer the key we use to encrypt new information, but we still need this

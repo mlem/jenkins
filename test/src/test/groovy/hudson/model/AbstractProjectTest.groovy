@@ -48,7 +48,7 @@ import hudson.triggers.Trigger
 import hudson.triggers.TriggerDescriptor;
 import hudson.util.StreamTaskListener;
 import hudson.util.OneShotEvent
-import jenkins.model.Jenkins
+import jenkins.model.JenkinsImpl
 import org.junit.Rule
 import org.junit.Test;
 import org.jvnet.hudson.test.Issue
@@ -391,9 +391,9 @@ public class AbstractProjectTest {
         j.createFreeStyleProject("j1");
         assert "" == deleteRedirectTarget("job/j1");
         j.createFreeStyleProject("j2");
-        Jenkins.getInstance().addView(new AllView("v1"));
+        JenkinsImpl.getInstance().addView(new AllView("v1"));
         assert "view/v1/" == deleteRedirectTarget("view/v1/job/j2");
-        MockFolder d = Jenkins.getInstance().createProject(MockFolder.class, "d");
+        MockFolder d = JenkinsImpl.getInstance().createProject(MockFolder.class, "d");
         d.addView(new AllView("v2"));
         ["j3","j4","j5"].each { n -> d.createProject(FreeStyleProject.class, n) }
         assert "job/d/" == deleteRedirectTarget("job/d/job/j3");

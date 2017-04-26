@@ -41,6 +41,7 @@ import hudson.util.PluginServletFilter;
 import hudson.util.Protector;
 import hudson.util.Scrambler;
 import hudson.util.XStream2;
+import jenkins.model.JenkinsImpl;
 import net.sf.json.JSONObject;
 import org.acegisecurity.Authentication;
 import org.acegisecurity.AuthenticationException;
@@ -88,7 +89,7 @@ import org.kohsuke.accmod.restrictions.NoExternalUse;
  *
  * <p>
  * Implements {@link AccessControlled} to satisfy view rendering, but in reality the access control
- * is done against the {@link jenkins.model.Jenkins} object.
+ * is done against the {@link JenkinsImpl} object.
  *
  * @author Kohsuke Kawaguchi
  */
@@ -269,7 +270,7 @@ public class HudsonPrivateSecurityRealm extends AbstractPasswordBasedSecurityRea
     }
 
     /**
-     * Creates a user account. Requires {@link Jenkins#ADMINISTER}
+     * Creates a user account. Requires {@link JenkinsImpl#ADMINISTER}
      */
     @Restricted(NoExternalUse.class)
     public User createAccountByAdmin(StaplerRequest req, StaplerResponse rsp, String addUserView, String successView) throws IOException, ServletException {

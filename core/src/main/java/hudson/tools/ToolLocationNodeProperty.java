@@ -26,7 +26,6 @@ package hudson.tools;
 import hudson.DescriptorExtensionList;
 import hudson.Extension;
 import hudson.model.Descriptor;
-import jenkins.model.Jenkins;
 import hudson.model.Node;
 import hudson.model.TaskListener;
 import hudson.slaves.NodeProperty;
@@ -35,6 +34,7 @@ import hudson.slaves.NodeSpecific;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import jenkins.model.JenkinsImpl;
 import org.jenkinsci.Symbol;
 import org.kohsuke.stapler.DataBoundConstructor;
 
@@ -133,7 +133,7 @@ public class ToolLocationNodeProperty extends NodeProperty<Node> {
 
         @Override
         public boolean isApplicable(Class<? extends Node> nodeType) {
-            return nodeType != Jenkins.class;
+            return nodeType != JenkinsImpl.class;
         }
     }
 

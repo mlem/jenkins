@@ -23,7 +23,7 @@
  */
 
 import hudson.remoting.Which;
-import jenkins.model.Jenkins;
+import jenkins.model.JenkinsImpl;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import org.jvnet.hudson.test.PropertiesTestSuite;
@@ -34,7 +34,7 @@ import org.jvnet.hudson.test.PropertiesTestSuite;
 public class CorePropertiesTest extends TestCase {
 
     public static Test suite() throws Exception {
-        return new PropertiesTestSuite(Which.jarFile(Jenkins.class));
+        return new PropertiesTestSuite(Which.jarFile(JenkinsImpl.class));
     }
 
 }

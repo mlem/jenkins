@@ -34,6 +34,7 @@ import hudson.model.View;
 
 import jenkins.model.Jenkins;
 
+import jenkins.model.JenkinsImpl;
 import org.acegisecurity.AccessDeniedException;
 import org.junit.Before;
 import org.junit.Test;
@@ -47,7 +48,7 @@ import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
-@PrepareForTest(Jenkins.class)
+@PrepareForTest(JenkinsImpl.class)
 @RunWith(PowerMockRunner.class)
 public class ViewOptionHandlerTest {
 
@@ -78,7 +79,7 @@ public class ViewOptionHandlerTest {
         when(outer.getDisplayName()).thenCallRealMethod();
         when(outer.getView("nested")).thenReturn(nested);
 
-        PowerMockito.mockStatic(Jenkins.class);
+        PowerMockito.mockStatic(JenkinsImpl.class);
         PowerMockito.when(Jenkins.getInstance()).thenReturn(jenkins);
         PowerMockito.when(Jenkins.getActiveInstance()).thenReturn(jenkins);
         when(jenkins.getView("outer")).thenReturn(outer);

@@ -1,5 +1,6 @@
 package jenkins.bugs;
 
+import jenkins.model.JenkinsImpl;
 import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
@@ -12,8 +13,8 @@ public class Jenkins41511Test {
 
     @BeforeClass
     public static void setUpClass() {
-        System.setProperty(Jenkins.class.getName()+".slaveAgentPort", "10000");
-        System.setProperty(Jenkins.class.getName()+".slaveAgentPortEnforce", "true");
+        System.setProperty(JenkinsImpl.class.getName()+".slaveAgentPort", "10000");
+        System.setProperty(JenkinsImpl.class.getName()+".slaveAgentPortEnforce", "true");
     }
 
     @Rule

@@ -1,6 +1,7 @@
 package jenkins.install;
 
 import jenkins.model.Jenkins;
+import jenkins.model.JenkinsImpl;
 import net.sf.json.JSONArray;
 
 import org.apache.commons.io.FileUtils;
@@ -37,7 +38,7 @@ public class UpgradeWizardTest {
     }
     
     private void setSetupWizard(SetupWizard wiz) throws Exception {
-        Field f = Jenkins.class.getDeclaredField("setupWizard");
+        Field f = JenkinsImpl.class.getDeclaredField("setupWizard");
         f.setAccessible(true);
         f.set(Jenkins.getInstance(), wiz);
     }

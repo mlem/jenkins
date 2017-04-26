@@ -51,6 +51,7 @@ import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
 import jenkins.model.DirectlyModifiableTopLevelItemGroup;
 import jenkins.model.Jenkins;
+import jenkins.model.JenkinsImpl;
 import org.acegisecurity.Authentication;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.StringUtils;
@@ -421,7 +422,7 @@ public class Items {
 
     /**
      * Gets a read-only view of all the {@link Item}s recursively in the {@link ItemGroup} tree visible to
-     * {@link Jenkins#getAuthentication()} without concern for the order in which items are returned. Each iteration
+     * {@link JenkinsImpl#getAuthentication()} without concern for the order in which items are returned. Each iteration
      * of the view will be "live" reflecting the items available between the time the iteration was started and the
      * time the iteration was completed, however if items are moved during an iteration - depending on the move - it
      * may be possible for such items to escape the entire iteration.
@@ -477,7 +478,7 @@ public class Items {
      * Fires all relevant events but does not verify that the item’s directory is not currently being used in some way (for example by a running build).
      * Does not check any permissions.
      * @param item some item (job or folder)
-     * @param destination the destination of the move (a folder or {@link Jenkins}); not the current parent (or you could just call {@link AbstractItem#renameTo})
+     * @param destination the destination of the move (a folder or {@link JenkinsImpl}); not the current parent (or you could just call {@link AbstractItem#renameTo})
      * @return the new item (usually the same object as {@code item})
      * @throws IOException if the move fails, or some subsequent step fails (directory might have already been moved)
      * @throws IllegalArgumentException if the move would really be a rename, or the destination cannot accept the item, or the destination already has an item of that name

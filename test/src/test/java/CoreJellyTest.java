@@ -22,8 +22,8 @@
  * THE SOFTWARE.
  */
 
-import jenkins.model.Jenkins;
 import hudson.remoting.Which;
+import jenkins.model.JenkinsImpl;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import org.jvnet.hudson.test.JellyTestSuiteBuilder;
@@ -35,6 +35,6 @@ import org.jvnet.hudson.test.JellyTestSuiteBuilder;
  */
 public class CoreJellyTest extends TestCase {
     public static Test suite() throws Exception {
-        return JellyTestSuiteBuilder.build(Which.jarFile(Jenkins.class),true);
+        return JellyTestSuiteBuilder.build(Which.jarFile(JenkinsImpl.class),true);
     }
 }

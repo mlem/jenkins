@@ -54,7 +54,7 @@ public class JenkinsGetRootUrlTest {
     @Before
     public void setUp() {
 
-        jenkins = mock(Jenkins.class, Mockito.CALLS_REAL_METHODS);
+        jenkins = mock(JenkinsImpl.class, Mockito.CALLS_REAL_METHODS);
         config = mock(JenkinsLocationConfiguration.class);
 
         mockStatic(JenkinsLocationConfiguration.class);

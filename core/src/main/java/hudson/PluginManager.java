@@ -26,6 +26,7 @@ package hudson;
 import edu.umd.cs.findbugs.annotations.NonNull;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import hudson.security.ACLContext;
+import jenkins.model.JenkinsImpl;
 import jenkins.util.SystemProperties;
 import hudson.PluginWrapper.Dependency;
 import hudson.init.InitMilestone;
@@ -184,27 +185,27 @@ public abstract class PluginManager extends AbstractModelObject implements OnMas
         JENKINS {
             @Override
             @NonNull PluginManager doCreate(@NonNull Class<? extends PluginManager> klass,
-                                            @NonNull Jenkins jenkins) throws ReflectiveOperationException {
-                return klass.getConstructor(Jenkins.class).newInstance(jenkins);
+                                            @NonNull JenkinsImpl jenkins) throws ReflectiveOperationException {
+                return klass.getConstructor(JenkinsImpl.class).newInstance(jenkins);
             }
         },
         SC_FILE {
             @Override
             @NonNull PluginManager doCreate(@NonNull Class<? extends PluginManager> klass,
-                                            @NonNull Jenkins jenkins) throws ReflectiveOperationException {
+                                            @NonNull JenkinsImpl jenkins) throws ReflectiveOperationException {
                 return klass.getConstructor(ServletContext.class, File.class).newInstance(jenkins.servletContext, jenkins.getRootDir());
             }
         },
         FILE {
             @Override
             @NonNull PluginManager doCreate(@NonNull Class<? extends PluginManager> klass,
-                                            @NonNull Jenkins jenkins) throws ReflectiveOperationException {
+                                            @NonNull JenkinsImpl jenkins) throws ReflectiveOperationException {
                 return klass.getConstructor(File.class).newInstance(jenkins.getRootDir());
             }
         };
 
         final @CheckForNull PluginManager create(@NonNull Class<? extends PluginManager> klass,
-                                                 @NonNull Jenkins jenkins) throws ReflectiveOperationException {
+                                                 @NonNull JenkinsImpl jenkins) throws ReflectiveOperationException {
             try {
                 return doCreate(klass, jenkins);
             } catch(NoSuchMethodException e) {
@@ -214,17 +215,17 @@ public abstract class PluginManager extends AbstractModelObject implements OnMas
         }
 
         abstract @NonNull PluginManager doCreate(@NonNull Class<? extends PluginManager> klass,
-                                                 @NonNull Jenkins jenkins) throws ReflectiveOperationException;
+                                                 @NonNull JenkinsImpl jenkins) throws ReflectiveOperationException;
     }
 
     /**
-     * Creates the {@link PluginManager} to use if no one is provided to a {@link Jenkins} object.
-     * This method will be called after creation of {@link Jenkins} object, but before it is fully initialized.
+     * Creates the {@link PluginManager} to use if no one is provided to a {@link JenkinsImpl} object.
+     * This method will be called after creation of {@link JenkinsImpl} object, but before it is fully initialized.
      * @param jenkins Jenkins Instance.
      * @return Plugin manager to use. If no custom class is configured or in case of any error, the default
      * {@link LocalPluginManager} is returned.
      */
-    public static @NonNull PluginManager createDefault(@NonNull Jenkins jenkins) {
+    public static @NonNull PluginManager createDefault(@NonNull JenkinsImpl jenkins) {
         String pmClassName = SystemProperties.getString(CUSTOM_PLUGIN_MANAGER);
         if (!StringUtils.isBlank(pmClassName)) {
             LOGGER.log(FINE, String.format("Use of custom plugin manager [%s] requested.", pmClassName));
@@ -277,7 +278,7 @@ public abstract class PluginManager extends AbstractModelObject implements OnMas
 
     /**
      * @deprecated as of 1.355
-     *      {@link PluginManager} can now live longer than {@link jenkins.model.Jenkins} instance, so
+     *      {@link PluginManager} can now live longer than {@link JenkinsImpl} instance, so
      *      use {@code Hudson.getInstance().servletContext} instead.
      */
     @Deprecated
@@ -364,7 +365,7 @@ public abstract class PluginManager extends AbstractModelObject implements OnMas
     /**
      * Called immediately after the construction.
      * This is a separate method so that code executed from here will see a valid value in
-     * {@link jenkins.model.Jenkins#pluginManager}.
+     * {@link JenkinsImpl#pluginManager}.
      */
     public TaskBuilder initTasks(final InitStrategy initStrategy) {
         TaskBuilder builder;
@@ -687,7 +688,7 @@ public abstract class PluginManager extends AbstractModelObject implements OnMas
             VersionNumber lastExecVersion = new VersionNumber(InstallUtil.getLastExecVersion());
 
             LOGGER.log(INFO, "Upgrading Jenkins. The last running version was {0}. This Jenkins is version {1}.",
-                    new Object[] {lastExecVersion, Jenkins.VERSION});
+                    new Object[] {lastExecVersion, JenkinsImpl.VERSION});
 
             final List<ClassicPluginStrategy.DetachedPlugin> detachedPlugins = ClassicPluginStrategy.getDetachedPlugins(lastExecVersion);
 
@@ -722,7 +723,7 @@ public abstract class PluginManager extends AbstractModelObject implements OnMas
             });
 
             LOGGER.log(INFO, "Upgraded Jenkins from version {0} to version {1}. Loaded detached plugins (and dependencies): {2}",
-                    new Object[] {lastExecVersion, Jenkins.VERSION, loadedDetached});
+                    new Object[] {lastExecVersion, JenkinsImpl.VERSION, loadedDetached});
 
             InstallUtil.saveLastExecVersion();
         } else {
@@ -1322,7 +1323,7 @@ public abstract class PluginManager extends AbstractModelObject implements OnMas
     @RequirePOST
     @Restricted(DoNotUse.class) // WebOnly
     public void doInstallPluginsDone() {
-        Jenkins j = Jenkins.getInstance();
+        JenkinsImpl j = Jenkins.getInstance();
         j.checkPermission(Jenkins.ADMINISTER);
         InstallUtil.proceedToNextStateFrom(InstallState.INITIAL_PLUGINS_INSTALLING);
     }
@@ -1522,7 +1523,7 @@ public abstract class PluginManager extends AbstractModelObject implements OnMas
      */
     @RequirePOST
     public HttpResponse doSiteConfigure(@QueryParameter String site) throws IOException {
-        Jenkins hudson = Jenkins.getInstance();
+        JenkinsImpl hudson = Jenkins.getInstance();
         hudson.checkPermission(CONFIGURE_UPDATECENTER);
         UpdateCenter uc = hudson.getUpdateCenter();
         PersistedList<UpdateSite> sites = uc.getSites();
@@ -1537,7 +1538,7 @@ public abstract class PluginManager extends AbstractModelObject implements OnMas
 
     @RequirePOST
     public HttpResponse doProxyConfigure(StaplerRequest req) throws IOException, ServletException {
-        Jenkins jenkins = Jenkins.getInstance();
+        JenkinsImpl jenkins = Jenkins.getInstance();
         jenkins.checkPermission(CONFIGURE_UPDATECENTER);
 
         ProxyConfiguration pc = req.bindJSON(ProxyConfiguration.class, req.getSubmittedForm());
@@ -1669,7 +1670,7 @@ public abstract class PluginManager extends AbstractModelObject implements OnMas
      * needs some plugins to be installed (or updated), those jobs
      * will be triggered.
      * Plugins are dynamically loaded whenever possible.
-     * Requires {@link Jenkins#ADMINISTER}.
+     * Requires {@link JenkinsImpl#ADMINISTER}.
      * @param configXml configuration that might be uploaded
      * @return an empty list if all is well, else a list of submitted jobs which must be completed before this configuration can be fully read
      * @throws IOException if loading or parsing the configuration failed

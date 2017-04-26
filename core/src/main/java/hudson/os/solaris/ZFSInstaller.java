@@ -29,6 +29,7 @@ import hudson.Launcher.LocalLauncher;
 import hudson.Util;
 import hudson.Extension;
 import hudson.Functions;
+import jenkins.model.JenkinsImpl;
 import jenkins.util.SystemProperties;
 import hudson.os.SU;
 import hudson.model.AdministrativeMonitor;
@@ -220,7 +221,7 @@ public class ZFSInstaller extends AdministrativeMonitor implements Serializable 
      */
     @RequirePOST
     public void doStart(StaplerRequest req, StaplerResponse rsp, @QueryParameter String username, @QueryParameter String password) throws ServletException, IOException {
-        Jenkins hudson = Jenkins.getInstance();
+        JenkinsImpl hudson = Jenkins.getInstance();
         hudson.checkPermission(Jenkins.ADMINISTER);
 
         final String datasetName;

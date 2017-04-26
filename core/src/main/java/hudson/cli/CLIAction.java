@@ -34,6 +34,7 @@ import javax.servlet.http.HttpServletResponse;
 import hudson.model.UnprotectedRootAction;
 import jenkins.model.Jenkins;
 
+import jenkins.model.JenkinsImpl;
 import org.jenkinsci.Symbol;
 import org.kohsuke.accmod.Restricted;
 import org.kohsuke.accmod.restrictions.NoExternalUse;
@@ -87,7 +88,7 @@ public class CLIAction implements UnprotectedRootAction, StaplerProxy {
     }
 
     public void doCommand(StaplerRequest req, StaplerResponse rsp) throws ServletException, IOException {
-        final Jenkins jenkins = Jenkins.getActiveInstance();
+        final JenkinsImpl jenkins = Jenkins.getActiveInstance();
         jenkins.checkPermission(Jenkins.READ);
 
         // Strip trailing slash

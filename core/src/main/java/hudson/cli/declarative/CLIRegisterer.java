@@ -36,6 +36,7 @@ import jenkins.ExtensionComponentSet;
 import jenkins.ExtensionRefreshException;
 import jenkins.model.Jenkins;
 import hudson.security.CliAuthenticator;
+import jenkins.model.JenkinsImpl;
 import org.acegisecurity.AccessDeniedException;
 import org.acegisecurity.Authentication;
 import org.acegisecurity.BadCredentialsException;
@@ -97,7 +98,7 @@ public class CLIRegisterer extends ExtensionFinder {
         return null;
     }
 
-    private List<ExtensionComponent<CLICommand>> discover(final Jenkins hudson) {
+    private List<ExtensionComponent<CLICommand>> discover(final JenkinsImpl hudson) {
         LOGGER.fine("Listing up @CLIMethod");
         List<ExtensionComponent<CLICommand>> r = new ArrayList<ExtensionComponent<CLICommand>>();
 

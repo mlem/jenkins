@@ -41,6 +41,7 @@ import java.util.List;
 import java.util.ArrayList;
 import java.io.IOException;
 
+import jenkins.model.JenkinsImpl;
 import jenkins.security.MasterToSlaveCallable;
 import org.kohsuke.args4j.Argument;
 
@@ -64,7 +65,7 @@ public class InstallToolCommand extends CLICommand {
     }
 
     protected int run() throws Exception {
-        Jenkins h = Jenkins.getActiveInstance();
+        JenkinsImpl h = Jenkins.getActiveInstance();
         h.checkPermission(Jenkins.READ);
 
         // where is this build running?

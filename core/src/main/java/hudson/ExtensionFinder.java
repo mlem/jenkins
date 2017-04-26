@@ -45,6 +45,7 @@ import jenkins.ExtensionFilter;
 import jenkins.ExtensionRefreshException;
 import jenkins.ProxyInjector;
 import jenkins.model.Jenkins;
+import jenkins.model.JenkinsImpl;
 import net.java.sezpoz.Index;
 import net.java.sezpoz.IndexItem;
 import org.kohsuke.accmod.Restricted;
@@ -266,7 +267,7 @@ public abstract class ExtensionFinder implements ExtensionPoint {
                 @Override
                 protected void configure() {
                     Jenkins j = Jenkins.getInstance();
-                    bind(Jenkins.class).toInstance(j);
+                    bind(JenkinsImpl.class).toInstance(j);
                     bind(PluginManager.class).toInstance(j.getPluginManager());
                 }
             });
@@ -282,7 +283,7 @@ public abstract class ExtensionFinder implements ExtensionPoint {
                 LOGGER.log(Level.SEVERE, "Failed to create Guice container from all the plugins",e);
                 // failing to load all bindings are disastrous, so recover by creating minimum that works
                 // by just including the core
-                container = Guice.createInjector(new SezpozModule(loadSezpozIndices(Jenkins.class.getClassLoader())));
+                container = Guice.createInjector(new SezpozModule(loadSezpozIndices(JenkinsImpl.class.getClassLoader())));
             }
 
             // expose Injector via lookup mechanism for interop with non-Guice clients

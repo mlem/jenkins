@@ -36,6 +36,7 @@ import java.util.Collections;
 import javax.annotation.Nonnull;
 
 import jenkins.model.Jenkins;
+import jenkins.model.JenkinsImpl;
 import net.sf.json.JSONObject;
 
 import org.acegisecurity.Authentication;
@@ -47,7 +48,7 @@ import org.kohsuke.stapler.StaplerRequest;
  *
  * <h2>Persistence</h2>
  * <p>
- * This object will be persisted along with {@link jenkins.model.Jenkins} object.
+ * This object will be persisted along with {@link JenkinsImpl} object.
  * Hudson by itself won't put the ACL returned from {@link #getRootACL()} into the serialized object graph,
  * so if that object contains state and needs to be persisted, it's the responsibility of
  * {@link AuthorizationStrategy} to do so (by keeping them in an instance field.)
@@ -56,7 +57,7 @@ import org.kohsuke.stapler.StaplerRequest;
  * <p>
  * The corresponding {@link Describable} instance will be asked to create a new {@link AuthorizationStrategy}
  * every time the system configuration is updated. Implementations that keep more state in ACL beyond
- * the system configuration should use {@link jenkins.model.Jenkins#getAuthorizationStrategy()} to talk to the current
+ * the system configuration should use {@link JenkinsImpl#getAuthorizationStrategy()} to talk to the current
  * instance to carry over the state. 
  *
  * @author Kohsuke Kawaguchi

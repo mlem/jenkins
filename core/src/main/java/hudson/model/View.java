@@ -58,6 +58,7 @@ import hudson.views.ListViewColumn;
 import hudson.widgets.Widget;
 import javax.annotation.Nonnull;
 import jenkins.model.Jenkins;
+import jenkins.model.JenkinsImpl;
 import jenkins.model.ModelObjectWithChildren;
 import jenkins.model.item_category.Categories;
 import jenkins.model.item_category.Category;
@@ -122,7 +123,7 @@ import org.xml.sax.SAXException;
 
 /**
  * Encapsulates the rendering of the list of {@link TopLevelItem}s
- * that {@link Jenkins} owns.
+ * that {@link JenkinsImpl} owns.
  *
  * <p>
  * This is an extension point in Hudson, allowing different kind of
@@ -536,7 +537,7 @@ public abstract class View extends AbstractModelObject implements AccessControll
      * If views don't want to show top-level actions, this method
      * can be overridden to return different objects.
      *
-     * @see Jenkins#getActions()
+     * @see JenkinsImpl#getActions()
      */
     public List<Action> getActions() {
     	List<Action> result = new ArrayList<Action>();
@@ -699,7 +700,7 @@ public abstract class View extends AbstractModelObject implements AccessControll
 
         public final ModelObject parent;
 
-        public People(Jenkins parent) {
+        public People(JenkinsImpl parent) {
             this.parent = parent;
             // for Hudson, really load all users
             Map<User,UserInfo> users = getUserInfo(parent.getItems());
@@ -790,8 +791,8 @@ public abstract class View extends AbstractModelObject implements AccessControll
         private final String iconSize;
         public final ModelObject parent;
 
-        /** @see Jenkins#getAsynchPeople */
-        public AsynchPeople(Jenkins parent) {
+        /** @see JenkinsImpl#getAsynchPeople */
+        public AsynchPeople(JenkinsImpl parent) {
             this.parent = parent;
             items = parent.getItems();
             unknown = User.getUnknown();
@@ -907,7 +908,7 @@ public abstract class View extends AbstractModelObject implements AccessControll
 
             @Exported public synchronized List<UserInfo> getUsers() {
                 if (people == null) {
-                    people = parent instanceof Jenkins ? new View.People((Jenkins) parent) : new View.People((View) parent);
+                    people = parent instanceof JenkinsImpl ? new View.People((JenkinsImpl) parent) : new View.People((View) parent);
                 }
                 return people.users;
             }
@@ -1058,7 +1059,7 @@ public abstract class View extends AbstractModelObject implements AccessControll
 
         if (StringUtils.isNotBlank(iconStyle)) {
             ctx = new JellyContext();
-            ctx.setVariable("resURL", req.getContextPath() + Jenkins.RESOURCE_PATH);
+            ctx.setVariable("resURL", req.getContextPath() + JenkinsImpl.RESOURCE_PATH);
         } else {
             ctx = null;
         }

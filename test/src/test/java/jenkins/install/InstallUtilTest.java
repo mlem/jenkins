@@ -31,6 +31,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import jenkins.model.JenkinsImpl;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -127,7 +128,7 @@ public class InstallUtilTest {
     }
 
     private void setStoredVersion(String version) throws Exception {
-        Field versionField = Jenkins.class.getDeclaredField("version");
+        Field versionField = JenkinsImpl.class.getDeclaredField("version");
         versionField.setAccessible(true);
         versionField.set(jenkinsRule.jenkins, version);
         Assert.assertEquals(version, Jenkins.getStoredVersion().toString());

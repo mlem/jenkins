@@ -6,6 +6,7 @@ import hudson.Functions;
 import hudson.Util;
 import hudson.util.HttpResponses;
 import jenkins.model.Jenkins;
+import jenkins.model.JenkinsImpl;
 import jenkins.util.io.FileBoolean;
 import org.apache.commons.io.FileUtils;
 import org.jenkinsci.remoting.Role;
@@ -52,7 +53,7 @@ public class AdminWhitelistRule implements StaplerProxy {
      */
     public final FilePathRuleConfig filePathRules;
 
-    private final Jenkins jenkins;
+    private final JenkinsImpl jenkins;
 
     private boolean masterKillSwitch;
 

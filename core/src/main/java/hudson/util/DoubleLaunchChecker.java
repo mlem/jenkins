@@ -26,6 +26,7 @@ package hudson.util;
 import hudson.init.Initializer;
 import jenkins.model.Jenkins;
 import hudson.triggers.SafeTimerTask;
+import jenkins.model.JenkinsImpl;
 import jenkins.util.Timer;
 import org.apache.commons.io.FileUtils;
 import org.kohsuke.stapler.StaplerRequest;
@@ -125,7 +126,7 @@ public class DoubleLaunchChecker {
      * Figures out a string that identifies this instance of Hudson.
      */
     public String getId() {
-        Jenkins h = Jenkins.getInstance();
+        JenkinsImpl h = Jenkins.getInstance();
 
         // in servlet 2.5, we can get the context path
         String contextPath="";

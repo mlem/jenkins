@@ -29,9 +29,10 @@ import hudson.ClassicPluginStrategy;
 import hudson.Util;
 import hudson.model.UsageStatistics.CombinedCipherInputStream;
 import hudson.node_monitors.ArchitectureMonitor;
-import hudson.util.VersionNumber;
+
 import java.util.Set;
 import jenkins.model.Jenkins;
+import jenkins.model.JenkinsImpl;
 import net.sf.json.JSONObject;
 import org.apache.commons.io.IOUtils;
 import org.junit.Rule;
@@ -89,13 +90,13 @@ public class UsageStatisticsTest {
         InputStreamReader r = new InputStreamReader(new GZIPInputStream(
                 new CombinedCipherInputStream(new ByteArrayInputStream(cipherText),priv,"AES")), "UTF-8");
         JSONObject o = JSONObject.fromObject(IOUtils.toString(r));
-        Jenkins jenkins = Jenkins.getActiveInstance();
+        JenkinsImpl jenkins = Jenkins.getActiveInstance();
         // A bit intrusive with UsageStatistics internals, but done to prevent undetected changes
         // that would cause issues with parsing/analyzing uploaded usage statistics
         assertEquals(1, o.getInt("stat"));
         assertEquals(jenkins.getLegacyInstanceId(), o.getString("install"));
         assertEquals(jenkins.servletContext.getServerInfo(), o.getString("servletContainer"));
-        assertEquals(Jenkins.VERSION, o.getString("version"));
+        assertEquals(JenkinsImpl.VERSION, o.getString("version"));
 
         assertTrue(o.has("plugins"));
         assertTrue(o.has("jobs"));

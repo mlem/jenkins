@@ -44,13 +44,13 @@ import javax.servlet.ServletException;
 
 import jenkins.model.GlobalConfigurationCategory;
 import jenkins.model.Jenkins;
+import jenkins.model.JenkinsImpl;
 import jenkins.util.ServerTcpPort;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 import org.jenkinsci.Symbol;
 import org.kohsuke.accmod.Restricted;
-import org.kohsuke.accmod.restrictions.DoNotUse;
 import org.kohsuke.accmod.restrictions.NoExternalUse;
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
@@ -58,7 +58,7 @@ import org.kohsuke.stapler.StaplerResponse;
 /**
  * Security configuration.
  *
- * For historical reasons, most of the actual configuration values are stored in {@link Jenkins}.
+ * For historical reasons, most of the actual configuration values are stored in {@link JenkinsImpl}.
  *
  * @author Kohsuke Kawaguchi
  */
@@ -107,7 +107,7 @@ public class GlobalSecurityConfiguration extends ManagementLink implements Descr
 
     public boolean configure(StaplerRequest req, JSONObject json) throws hudson.model.Descriptor.FormException {
         // for compatibility reasons, the actual value is stored in Jenkins
-        Jenkins j = Jenkins.getInstance();
+        JenkinsImpl j = Jenkins.getInstance();
         j.checkPermission(Jenkins.ADMINISTER);
         if (json.has("useSecurity")) {
             JSONObject security = json.getJSONObject("useSecurity");

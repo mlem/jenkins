@@ -3,6 +3,7 @@ package hudson.init;
 import com.google.inject.Injector;
 import hudson.model.Hudson;
 import jenkins.model.Jenkins;
+import jenkins.model.JenkinsImpl;
 import org.jvnet.hudson.annotation_indexer.Index;
 import org.jvnet.hudson.reactor.Milestone;
 import org.jvnet.hudson.reactor.MilestoneImpl;
@@ -117,7 +118,7 @@ abstract class TaskMethodFinder<T extends Annotation> extends TaskBuilder {
     private Object lookUp(Class<?> type) {
         Jenkins j = Jenkins.getInstance();
         assert j != null : "This method is only invoked after the Jenkins singleton instance has been set";
-        if (type==Jenkins.class || type==Hudson.class)
+        if (type==JenkinsImpl.class || type==Hudson.class)
             return j;
         Injector i = j.getInjector();
         if (i!=null)

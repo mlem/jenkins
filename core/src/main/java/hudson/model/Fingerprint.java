@@ -49,6 +49,7 @@ import hudson.util.XStream2;
 import java.io.EOFException;
 import jenkins.model.FingerprintFacet;
 import jenkins.model.Jenkins;
+import jenkins.model.JenkinsImpl;
 import jenkins.model.TransientFingerprintFacetFactory;
 import org.apache.commons.lang.StringUtils;
 import org.kohsuke.stapler.export.Exported;
@@ -120,16 +121,16 @@ public class Fingerprint implements ModelObject, Saveable {
         /**
          * Checks if the current user has permission to see this pointer.
          * @return {@code true} if the job exists and user has {@link Item#READ} permissions
-         *      or if the current user has {@link Jenkins#ADMINISTER} permissions. 
+         *      or if the current user has {@link JenkinsImpl#ADMINISTER} permissions.
          *      If the job exists, but the current user has no permission to discover it, 
          *      {@code false}  will be returned.
-         *      If the job has been deleted and the user has no {@link Jenkins#ADMINISTER} permissions,
+         *      If the job has been deleted and the user has no {@link JenkinsImpl#ADMINISTER} permissions,
          *      it also returns {@code false}   in order to avoid the job existence fact exposure.
          */
         private boolean hasPermissionToDiscoverBuild() {
             // We expose the data to Jenkins administrators in order to
             // let them manage the data for deleted jobs (also works for SYSTEM)
-            final Jenkins instance = Jenkins.getInstance();
+            final JenkinsImpl instance = Jenkins.getInstance();
             if (instance.hasPermission(Jenkins.ADMINISTER)) {
                 return true;
             }
@@ -996,7 +997,7 @@ public class Fingerprint implements ModelObject, Saveable {
     @Exported(name="usage")
     public @Nonnull List<RangeItem> _getUsages() {
         List<RangeItem> r = new ArrayList<RangeItem>();
-        final Jenkins instance = Jenkins.getInstance();
+        final JenkinsImpl instance = Jenkins.getInstance();
         for (Entry<String, RangeSet> e : usages.entrySet()) {
             final String itemName = e.getKey();
             if (instance.hasPermission(Jenkins.ADMINISTER) || canDiscoverItem(itemName)) {

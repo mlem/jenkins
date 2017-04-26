@@ -32,6 +32,7 @@ import java.util.Collection;
 import javax.servlet.ServletException;
 
 import jenkins.model.Jenkins;
+import jenkins.model.JenkinsImpl;
 import org.jenkinsci.Symbol;
 import org.kohsuke.stapler.DataBoundConstructor;
 import org.kohsuke.stapler.QueryParameter;
@@ -132,7 +133,7 @@ public class ProxyView extends View implements StaplerFallback {
         @Override
         public boolean isInstantiable() {
         	// doesn't make sense to add a ProxyView to the global views
-        	return !(Stapler.getCurrentRequest().findAncestorObject(ViewGroup.class) instanceof Jenkins);
+        	return !(Stapler.getCurrentRequest().findAncestorObject(ViewGroup.class) instanceof JenkinsImpl);
         }
 
     }

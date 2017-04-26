@@ -60,8 +60,8 @@ import antlr.ANTLRException;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
 
-import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import hudson.model.Items;
+import jenkins.model.JenkinsImpl;
 import jenkins.model.ParameterizedJobMixIn;
 import org.jenkinsci.Symbol;
 
@@ -298,7 +298,7 @@ public abstract class Trigger<J extends Item> implements Describable<Trigger<?>>
      * This timer is available for all the components inside Hudson to schedule
      * some work.
      *
-     * Initialized and cleaned up by {@link jenkins.model.Jenkins}, but value kept here for compatibility.
+     * Initialized and cleaned up by {@link JenkinsImpl}, but value kept here for compatibility.
      *
      * If plugins want to run periodic jobs, they should implement {@link PeriodicWork}.
      *

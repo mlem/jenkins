@@ -23,9 +23,11 @@
  */
 package hudson.model;
 
+import jenkins.model.JenkinsImpl;
+
 /**
  * Adds {@link #getDescriptorByName(String)} to bind {@link Descriptor}s to URL.
- * Binding them at some specific object (instead of {@link jenkins.model.Jenkins}), allows
+ * Binding them at some specific object (instead of {@link JenkinsImpl}), allows
  * {@link Descriptor}s to perform context-specific form field validation.
  *
  * <p>
@@ -41,7 +43,7 @@ public interface DescriptorByNameOwner extends ModelObject {
      * Exposes all {@link Descriptor}s by its name to URL.
      *
      * <p>
-     * Implementation should always delegate to {@link jenkins.model.Jenkins#getDescriptorByName(String)}.
+     * Implementation should always delegate to {@link JenkinsImpl#getDescriptorByName(String)}.
      *
      * @param id
      *      Either {@link Descriptor#getId()} (recommended) or the short name.

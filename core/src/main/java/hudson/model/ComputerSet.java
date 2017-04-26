@@ -38,6 +38,7 @@ import hudson.util.DescribableList;
 import hudson.util.FormApply;
 import hudson.util.FormValidation;
 import jenkins.model.Jenkins;
+import jenkins.model.JenkinsImpl;
 import jenkins.model.ModelObjectWithChildren;
 import jenkins.model.ModelObjectWithContextMenu.ContextMenu;
 import jenkins.util.Timer;
@@ -235,7 +236,7 @@ public final class ComputerSet extends AbstractModelObject implements Describabl
     public synchronized void doCreateItem( StaplerRequest req, StaplerResponse rsp,
                                            @QueryParameter String name, @QueryParameter String mode,
                                            @QueryParameter String from ) throws IOException, ServletException {
-        final Jenkins app = Jenkins.getInstance();
+        final JenkinsImpl app = Jenkins.getInstance();
         app.checkPermission(Computer.CREATE);
 
         if(mode!=null && mode.equals("copy")) {
@@ -284,7 +285,7 @@ public final class ComputerSet extends AbstractModelObject implements Describabl
     public synchronized void doDoCreateItem( StaplerRequest req, StaplerResponse rsp,
                                            @QueryParameter String name,
                                            @QueryParameter String type ) throws IOException, ServletException, FormException {
-        final Jenkins app = Jenkins.getInstance();
+        final JenkinsImpl app = Jenkins.getInstance();
         app.checkPermission(Computer.CREATE);
         String fixedName = Util.fixEmptyAndTrim(name);
         checkName(fixedName);

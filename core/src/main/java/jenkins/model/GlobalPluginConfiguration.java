@@ -14,7 +14,7 @@ import java.io.IOException;
  * Include config.jelly defined for {@link Plugin}s.
  *
  * <p>
- * This object just acts as a proxy to configure {@link Jenkins#clouds}
+ * This object just acts as a proxy to configure {@link JenkinsImpl#clouds}
  *
  * @author Kohsuke Kawaguchi
  */

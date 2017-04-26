@@ -39,6 +39,7 @@ import hudson.views.ListViewColumn;
 import jenkins.model.GlobalConfiguration;
 import jenkins.model.GlobalConfigurationCategory;
 import jenkins.model.Jenkins;
+import jenkins.model.JenkinsImpl;
 import jenkins.util.io.OnMaster;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -317,7 +318,7 @@ public abstract class Descriptor<T extends Describable<T>> implements Saveable, 
      * this to disambiguate them.
      *
      * <p>
-     * To look up {@link Descriptor} from ID, use {@link Jenkins#getDescriptor(String)}.
+     * To look up {@link Descriptor} from ID, use {@link JenkinsImpl#getDescriptor(String)}.
      *
      * @return
      *      Stick to valid Java identifier character, plus '.', which had to be allowed for historical reasons.
@@ -346,7 +347,7 @@ public abstract class Descriptor<T extends Describable<T>> implements Saveable, 
 
     /**
      * Gets the URL that this Descriptor is bound to, relative to the nearest {@link DescriptorByNameOwner}.
-     * Since {@link Jenkins} is a {@link DescriptorByNameOwner}, there's always one such ancestor to any request.
+     * Since {@link JenkinsImpl} is a {@link DescriptorByNameOwner}, there's always one such ancestor to any request.
      */
     public String getDescriptorUrl() {
         return "descriptorByName/"+getId();

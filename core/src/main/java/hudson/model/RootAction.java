@@ -25,13 +25,14 @@ package hudson.model;
 
 import hudson.ExtensionPoint;
 import hudson.Extension;
+import jenkins.model.JenkinsImpl;
 
 /**
- * Marker interface for actions that are added to {@link jenkins.model.Jenkins}.
+ * Marker interface for actions that are added to {@link JenkinsImpl}.
  *
  * <p>
  * Extend from this interface and put {@link Extension} on your subtype
- * to have them auto-registered to {@link jenkins.model.Jenkins}.
+ * to have them auto-registered to {@link JenkinsImpl}.
  *
  * @author Kohsuke Kawaguchi
  * @since 1.311

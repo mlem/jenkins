@@ -5,7 +5,7 @@ import hudson.ExtensionPoint;
 import hudson.model.Label;
 import hudson.model.Node;
 import hudson.model.queue.CauseOfBlockage;
-import jenkins.model.Jenkins;
+import jenkins.model.JenkinsImpl;
 
 import java.util.Collection;
 
@@ -87,7 +87,7 @@ public abstract class CloudProvisioningListener implements ExtensionPoint {
     }
 
     /**
-     * Called when {@link Jenkins#addNode(Node)} throws an exception.
+     * Called when {@link JenkinsImpl#addNode(Node)} throws an exception.
      *
      * @param plannedNode the plannedNode which resulted in the <code>node</code> being provisioned
      * @param node the node which has been provisioned by the cloud

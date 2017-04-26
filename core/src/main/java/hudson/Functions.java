@@ -26,6 +26,7 @@
 package hudson;
 
 import hudson.model.Slave;
+import jenkins.model.*;
 import jenkins.util.SystemProperties;
 import hudson.cli.CLICommand;
 import hudson.console.ConsoleAnnotationDescriptor;
@@ -130,12 +131,6 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import jenkins.model.GlobalConfiguration;
-import jenkins.model.GlobalConfigurationCategory;
-import jenkins.model.Jenkins;
-import jenkins.model.ModelObjectWithChildren;
-import jenkins.model.ModelObjectWithContextMenu;
-
 import org.acegisecurity.providers.anonymous.AnonymousAuthenticationToken;
 import org.apache.commons.jelly.JellyContext;
 import org.apache.commons.jelly.JellyTagException;
@@ -218,7 +213,7 @@ public class Functions {
     /**
      * During Jenkins start-up, before {@link InitMilestone#PLUGINS_STARTED} the extensions lists will be empty
      * and they are not guaranteed to be fully populated until after {@link InitMilestone#EXTENSIONS_AUGMENTED},
-     * similarly, during termination after {@link Jenkins#isTerminating()} is set, it is no longer safe to access
+     * similarly, during termination after {@link JenkinsImpl#isTerminating()} is set, it is no longer safe to access
      * the extensions lists.
      * If you attempt to access the extensions list from a UI thread while the extensions are being loaded you will
      * hit a big honking great monitor lock that will block until the effective extension list has been determined
@@ -394,7 +389,7 @@ public class Functions {
      * </pre>
      *
      * <p>
-     * The head portion is the part of the URL from the {@link jenkins.model.Jenkins}
+     * The head portion is the part of the URL from the {@link JenkinsImpl}
      * object to the first {@link Run} subtype. When "next/prev build"
      * is chosen, this part remains intact.
      *
@@ -489,7 +484,7 @@ public class Functions {
     }
 
     public static List<LogRecord> getLogRecords() {
-        return Jenkins.logRecords;
+        return JenkinsImpl.logRecords;
     }
 
     public static String printLogRecord(LogRecord r) {
@@ -1390,14 +1385,14 @@ public class Functions {
     }
 
     public static String getVersion() {
-        return Jenkins.VERSION;
+        return JenkinsImpl.VERSION;
     }
 
     /**
      * Resource path prefix.
      */
     public static String getResourcePath() {
-        return Jenkins.RESOURCE_PATH;
+        return JenkinsImpl.RESOURCE_PATH;
     }
 
     public static String getViewResource(Object it, String path) {
@@ -1409,7 +1404,7 @@ public class Functions {
             clazz = ((Descriptor)it).clazz;
 
         StringBuilder buf = new StringBuilder(Stapler.getCurrentRequest().getContextPath());
-        buf.append(Jenkins.VIEW_RESOURCE_PATH).append('/');
+        buf.append(JenkinsImpl.VIEW_RESOURCE_PATH).append('/');
         buf.append(clazz.getName().replace('.','/').replace('$','/'));
         buf.append('/').append(path);
 
@@ -2017,11 +2012,11 @@ public class Functions {
      * discovery of Jenkins.
      */
     public static void advertiseHeaders(HttpServletResponse rsp) {
-        Jenkins j = Jenkins.getInstanceOrNull();
+        JenkinsImpl j = Jenkins.getInstanceOrNull();
         if (j!=null) {
             rsp.setHeader("X-Hudson","1.395");
-            rsp.setHeader("X-Jenkins", Jenkins.VERSION);
-            rsp.setHeader("X-Jenkins-Session", Jenkins.SESSION_HASH);
+            rsp.setHeader("X-Jenkins", JenkinsImpl.VERSION);
+            rsp.setHeader("X-Jenkins-Session", JenkinsImpl.SESSION_HASH);
 
             TcpSlaveAgentListener tal = j.tcpSlaveAgentListener;
             if (tal !=null) {

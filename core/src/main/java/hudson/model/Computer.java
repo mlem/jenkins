@@ -29,9 +29,9 @@ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import hudson.EnvVars;
 import hudson.Extension;
 import hudson.Launcher.ProcStarter;
+import jenkins.model.JenkinsImpl;
 import jenkins.util.SystemProperties;
 import hudson.Util;
-import hudson.cli.declarative.CLIMethod;
 import hudson.cli.declarative.CLIResolver;
 import hudson.console.AnnotatedLargeText;
 import hudson.init.Initializer;
@@ -84,7 +84,6 @@ import org.kohsuke.stapler.HttpRedirect;
 import org.kohsuke.stapler.WebMethod;
 import org.kohsuke.stapler.export.Exported;
 import org.kohsuke.stapler.export.ExportedBean;
-import org.kohsuke.args4j.Option;
 import org.kohsuke.stapler.interceptor.RequirePOST;
 
 import javax.annotation.OverridingMethodsMustInvokeSuper;
@@ -819,7 +818,7 @@ public /*transient*/ abstract class Computer extends Actionable implements Acces
     }
 
     /**
-     * Called by {@link Jenkins#updateComputerList()} to notify {@link Computer} that it will be discarded.
+     * Called by {@link JenkinsImpl#updateComputerList()} to notify {@link Computer} that it will be discarded.
      *
      * <p>
      * Note that at this point {@link #getNode()} returns null.
@@ -834,7 +833,7 @@ public /*transient*/ abstract class Computer extends Actionable implements Acces
     }
 
     /**
-     * Called by {@link Jenkins#updateComputerList()} to notify {@link Computer} that it will be discarded.
+     * Called by {@link JenkinsImpl#updateComputerList()} to notify {@link Computer} that it will be discarded.
      *
      * <p>
      * Note that at this point {@link #getNode()} returns null.
@@ -851,10 +850,10 @@ public /*transient*/ abstract class Computer extends Actionable implements Acces
     }
 
     /**
-     * Called by {@link Jenkins} when this computer is removed.
+     * Called by {@link JenkinsImpl} when this computer is removed.
      *
      * <p>
-     * This happens when list of nodes are updated (for example by {@link Jenkins#setNodes(List)} and
+     * This happens when list of nodes are updated (for example by {@link JenkinsImpl#setNodes(List)} and
      * the computer becomes redundant. Such {@link Computer}s get {@linkplain #kill() killed}, then
      * after all its executors are finished, this method is called.
      *
@@ -1091,7 +1090,7 @@ public /*transient*/ abstract class Computer extends Actionable implements Acces
 
     /**
      * Interrupt all {@link Executor}s.
-     * Called from {@link Jenkins#cleanUp}.
+     * Called from {@link JenkinsImpl#cleanUp}.
      */
     public void interrupt() {
         Queue.withLock(new Runnable() {
@@ -1284,7 +1283,7 @@ public /*transient*/ abstract class Computer extends Actionable implements Acces
         /**
          * In the normal case we would use {@link Computer} as the logger's name, however to
          * do that we would have to send the {@link Computer} class over to the remote classloader
-         * and then it would need to be loaded, which pulls in {@link Jenkins} and loads that
+         * and then it would need to be loaded, which pulls in {@link JenkinsImpl} and loads that
          * and then that fails to load as you are not supposed to do that. Another option
          * would be to export the logger over remoting, with increased complexity as a result.
          * Instead we just use a logger based on this class name and prevent any references to

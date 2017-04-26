@@ -86,7 +86,7 @@ public class AssetManager implements UnprotectedRootAction {
                 name = "assets/" + path;
             }
 
-            ClassLoader cl = Jenkins.class.getClassLoader();
+            ClassLoader cl = JenkinsImpl.class.getClassLoader();
             URL url = (URL) $findResource.invoke(cl, name);
             if (url==null) {
                 // pick the last one, which is the one closest to the leaf of the classloader tree.

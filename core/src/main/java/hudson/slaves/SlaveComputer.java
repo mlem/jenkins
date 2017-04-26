@@ -43,13 +43,13 @@ import hudson.remoting.VirtualChannel;
 import hudson.security.ACL;
 import hudson.slaves.OfflineCause.ChannelTermination;
 import hudson.util.Futures;
-import hudson.util.IOUtils;
 import hudson.util.NullStream;
 import hudson.util.RingBufferLogHandler;
 import hudson.util.StreamTaskListener;
 import hudson.util.io.RewindableFileOutputStream;
 import hudson.util.io.RewindableRotatingFileOutputStream;
 import jenkins.model.Jenkins;
+import jenkins.model.JenkinsImpl;
 import jenkins.security.ChannelConfigurator;
 import jenkins.security.MasterToSlaveCallable;
 import jenkins.slaves.EncryptedSlaveAgentJnlpFile;
@@ -656,7 +656,7 @@ public class SlaveComputer extends Computer {
      * Serves jar files for JNLP agents.
      *
      * @deprecated since 2008-08-18.
-     *      This URL binding is no longer used and moved up directly under to {@link jenkins.model.Jenkins},
+     *      This URL binding is no longer used and moved up directly under to {@link JenkinsImpl},
      *      but it's left here for now just in case some old JNLP agents request it.
      */
     @Deprecated

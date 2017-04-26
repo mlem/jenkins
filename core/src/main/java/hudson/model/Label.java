@@ -46,6 +46,7 @@ import hudson.slaves.Cloud;
 import hudson.util.QuotedStringTokenizer;
 import hudson.util.VariableResolver;
 import jenkins.model.Jenkins;
+import jenkins.model.JenkinsImpl;
 import jenkins.model.ModelObjectWithChildren;
 import org.acegisecurity.context.SecurityContext;
 import org.acegisecurity.context.SecurityContextHolder;
@@ -74,8 +75,8 @@ import com.thoughtworks.xstream.io.HierarchicalStreamReader;
  * Group of {@link Node}s.
  *
  * @author Kohsuke Kawaguchi
- * @see Jenkins#getLabels()
- * @see Jenkins#getLabel(String)
+ * @see JenkinsImpl#getLabels()
+ * @see JenkinsImpl#getLabel(String)
  */
 @ExportedBean
 public abstract class Label extends Actionable implements Comparable<Label>, ModelObjectWithChildren {
@@ -222,7 +223,7 @@ public abstract class Label extends Actionable implements Comparable<Label>, Mod
     public Set<Cloud> getClouds() {
         if(clouds==null) {
             Set<Cloud> r = new HashSet<Cloud>();
-            Jenkins h = Jenkins.getInstance();
+            JenkinsImpl h = Jenkins.getInstance();
             for (Cloud c : h.clouds) {
                 if(c.canProvision(this))
                     r.add(c);

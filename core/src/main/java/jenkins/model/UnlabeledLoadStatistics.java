@@ -40,7 +40,7 @@ import java.util.Iterator;
  * and the # of executors that can execute them ({@link Node} whose mode is {@link Mode#EXCLUSIVE})
  *
  * @see Mode#EXCLUSIVE
- * @see Jenkins#unlabeledLoad
+ * @see JenkinsImpl#unlabeledLoad
  * @see OverallLoadStatistics
  * @author Kohsuke Kawaguchi
  */

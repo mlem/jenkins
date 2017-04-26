@@ -25,6 +25,7 @@ package hudson.model;
 
 import hudson.Extension;
 import jenkins.model.Jenkins;
+import jenkins.model.JenkinsImpl;
 import org.jenkins.ui.icon.Icon;
 import org.jenkins.ui.icon.IconSet;
 import org.jenkinsci.Symbol;
@@ -43,7 +44,7 @@ public class FreeStyleProject extends Project<FreeStyleProject,FreeStyleBuild> i
      * @deprecated as of 1.390
      */
     @Deprecated
-    public FreeStyleProject(Jenkins parent, String name) {
+    public FreeStyleProject(JenkinsImpl parent, String name) {
         super(parent, name);
     }
 
@@ -96,7 +97,7 @@ public class FreeStyleProject extends Project<FreeStyleProject,FreeStyleBuild> i
 
         @Override
         public String getIconFilePathPattern() {
-            return (Jenkins.RESOURCE_PATH + "/images/:size/freestyleproject.png").replaceFirst("^/", "");
+            return (JenkinsImpl.RESOURCE_PATH + "/images/:size/freestyleproject.png").replaceFirst("^/", "");
         }
 
         @Override

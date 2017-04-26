@@ -27,6 +27,7 @@ import jenkins.model.Jenkins;
 import hudson.model.TopLevelItem;
 import hudson.Extension;
 import hudson.model.Item;
+import jenkins.model.JenkinsImpl;
 import jenkins.model.ModifiableTopLevelItemGroup;
 import org.kohsuke.args4j.Argument;
 
@@ -50,7 +51,7 @@ public class CopyJobCommand extends CLICommand {
     public String dst;
 
     protected int run() throws Exception {
-        Jenkins jenkins = Jenkins.getActiveInstance();
+        JenkinsImpl jenkins = Jenkins.getActiveInstance();
 
         if (jenkins.getItemByFullName(dst)!=null) {
             throw new IllegalStateException("Job '"+dst+"' already exists");

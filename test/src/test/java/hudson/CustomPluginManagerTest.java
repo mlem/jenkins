@@ -23,7 +23,7 @@
  */
 package hudson;
 
-import jenkins.model.Jenkins;
+import jenkins.model.JenkinsImpl;
 import org.junit.Rule;
 import org.junit.Test;
 import org.jvnet.hudson.test.Issue;
@@ -90,7 +90,7 @@ public class CustomPluginManagerTest {
     }
 
     public static class CustomPluginManager1 extends LocalPluginManager implements CustomPluginManager {
-        public CustomPluginManager1(Jenkins jenkins) {
+        public CustomPluginManager1(JenkinsImpl jenkins) {
             super(jenkins);
         }
     }

@@ -46,6 +46,7 @@ import java.util.logging.Logger;
 import java.util.concurrent.CopyOnWriteArrayList;
 import javax.annotation.CheckForNull;
 
+import jenkins.model.JenkinsImpl;
 import org.kohsuke.stapler.Stapler;
 import net.sf.json.JSONObject;
 
@@ -53,7 +54,7 @@ import net.sf.json.JSONObject;
  * {@link ExtensionList} for holding a set of {@link Descriptor}s, which is a group of descriptors for
  * the same extension point.
  *
- * Use {@link jenkins.model.Jenkins#getDescriptorList(Class)} to obtain instances.
+ * Use {@link JenkinsImpl#getDescriptorList(Class)} to obtain instances.
  *
  * @param <D>
  *      Represents the descriptor type. This is {@code Descriptor<T>} normally but often there are subtypes
@@ -71,7 +72,7 @@ public class DescriptorExtensionList<T extends Describable<T>, D extends Descrip
      */
     @SuppressWarnings({"unchecked", "rawtypes"})
     public static <T extends Describable<T>,D extends Descriptor<T>>
-    DescriptorExtensionList<T,D> createDescriptorList(Jenkins jenkins, Class<T> describableType) {
+    DescriptorExtensionList<T,D> createDescriptorList(JenkinsImpl jenkins, Class<T> describableType) {
         if (describableType == (Class) Publisher.class) {
             return (DescriptorExtensionList) new Publisher.DescriptorExtensionListImpl(jenkins);
         }
@@ -85,7 +86,7 @@ public class DescriptorExtensionList<T extends Describable<T>, D extends Descrip
     @Deprecated
     public static <T extends Describable<T>,D extends Descriptor<T>>
     DescriptorExtensionList<T,D> createDescriptorList(Hudson hudson, Class<T> describableType) {
-        return (DescriptorExtensionList)createDescriptorList((Jenkins)hudson,describableType);
+        return (DescriptorExtensionList)createDescriptorList((JenkinsImpl)hudson,describableType);
     }
 
     /**
@@ -99,10 +100,10 @@ public class DescriptorExtensionList<T extends Describable<T>, D extends Descrip
      */
     @Deprecated
     protected DescriptorExtensionList(Hudson hudson, Class<T> describableType) {
-        this((Jenkins)hudson,describableType);
+        this((JenkinsImpl)hudson,describableType);
     }
 
-    protected DescriptorExtensionList(Jenkins jenkins, Class<T> describableType) {
+    protected DescriptorExtensionList(JenkinsImpl jenkins, Class<T> describableType) {
         super(jenkins, (Class)Descriptor.class, (CopyOnWriteArrayList)getLegacyDescriptors(describableType));
         this.describableType = describableType;
     }

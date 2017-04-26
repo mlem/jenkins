@@ -43,6 +43,7 @@ import java.util.Collections;
 import java.util.List;
 import javax.annotation.CheckForNull;
 import jenkins.model.Jenkins;
+import jenkins.model.JenkinsImpl;
 
 /**
  * Receives notifications about SCM activities in Hudson.
@@ -54,7 +55,7 @@ import jenkins.model.Jenkins;
  * Once instantiated, use the {@link #register()} method to start receiving events. 
  *
  * @author Kohsuke Kawaguchi
- * @see jenkins.model.Jenkins#getSCMListeners()
+ * @see JenkinsImpl#getSCMListeners()
  * @since 1.70
  */
 public abstract class SCMListener implements ExtensionPoint {

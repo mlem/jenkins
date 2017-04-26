@@ -26,6 +26,7 @@ package hudson.model;
 
 import hudson.security.AccessControlled;
 import hudson.views.ViewsTabBar;
+import jenkins.model.JenkinsImpl;
 
 import java.io.IOException;
 import java.util.Collection;
@@ -91,7 +92,7 @@ public interface ViewGroup extends Saveable, ModelObject, AccessControlled {
      *
      * <p>
      * It is the caller's responsibility to ensure that the new name is a
-     * {@linkplain jenkins.model.Jenkins#checkGoodName(String) legal view name}.
+     * {@linkplain JenkinsImpl#checkGoodName(String) legal view name}.
      */
     void onViewRenamed(View view, String oldName, String newName);
 

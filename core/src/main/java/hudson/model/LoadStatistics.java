@@ -24,6 +24,7 @@
 package hudson.model;
 
 import hudson.Extension;
+import jenkins.model.JenkinsImpl;
 import jenkins.util.SystemProperties;
 import hudson.model.MultiStageTimeSeries.TimeScale;
 import hudson.model.MultiStageTimeSeries.TrendChart;
@@ -67,8 +68,8 @@ import javax.annotation.CheckForNull;
  *
  * @author Kohsuke Kawaguchi
  * @see Label#loadStatistics
- * @see Jenkins#overallLoad
- * @see Jenkins#unlabeledLoad
+ * @see JenkinsImpl#overallLoad
+ * @see JenkinsImpl#unlabeledLoad
  */
 @ExportedBean
 public abstract class LoadStatistics {
@@ -389,7 +390,7 @@ public abstract class LoadStatistics {
         }
 
         protected void doRun() {
-            Jenkins j = Jenkins.getInstance();
+            JenkinsImpl j = Jenkins.getInstance();
             List<Queue.BuildableItem> bis = j.getQueue().getBuildableItems();
 
             // update statistics on agents

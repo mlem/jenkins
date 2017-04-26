@@ -26,6 +26,7 @@ package hudson.cli;
 import jenkins.model.Jenkins;
 import hudson.Extension;
 import hudson.model.Item;
+import jenkins.model.JenkinsImpl;
 import jenkins.model.ModifiableTopLevelItemGroup;
 import org.kohsuke.args4j.Argument;
 
@@ -45,7 +46,7 @@ public class CreateJobCommand extends CLICommand {
     public String name;
 
     protected int run() throws Exception {
-        Jenkins h = Jenkins.getActiveInstance();
+        JenkinsImpl h = Jenkins.getActiveInstance();
 
         if (h.getItemByFullName(name)!=null) {
             throw new IllegalStateException("Job '"+name+"' already exists");

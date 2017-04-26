@@ -65,10 +65,10 @@ import java.util.logging.Logger;
 public class Nodes implements Saveable {
 
     /**
-     * The {@link Jenkins} instance that we are tracking nodes for.
+     * The {@link JenkinsImpl} instance that we are tracking nodes for.
      */
     @Nonnull
-    private final Jenkins jenkins;
+    private final JenkinsImpl jenkins;
 
     /**
      * The map of nodes.
@@ -76,13 +76,13 @@ public class Nodes implements Saveable {
     private final ConcurrentMap<String, Node> nodes = new ConcurrentSkipListMap<String, Node>();
 
     /**
-     * Constructor, intended to be called only from {@link Jenkins}.
+     * Constructor, intended to be called only from {@link JenkinsImpl}.
      *
-     * @param jenkins A reference to the {@link Jenkins} that this instance is tracking nodes for, beware not to
+     * @param jenkins A reference to the {@link JenkinsImpl} that this instance is tracking nodes for, beware not to
      *                let this reference escape from a partially constructed {@link Nodes} as when we are passed the
-     *                reference the {@link Jenkins} instance has not completed instantiation.
+     *                reference the {@link JenkinsImpl} instance has not completed instantiation.
      */
-    /*package*/ Nodes(@Nonnull Jenkins jenkins) {
+    /*package*/ Nodes(@Nonnull JenkinsImpl jenkins) {
         this.jenkins = jenkins;
     }
 

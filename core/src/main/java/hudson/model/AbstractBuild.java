@@ -30,6 +30,7 @@ import hudson.EnvVars;
 import hudson.FilePath;
 import hudson.Functions;
 import hudson.Launcher;
+import jenkins.model.JenkinsImpl;
 import jenkins.util.SystemProperties;
 import hudson.console.ModelHyperlinkNote;
 import hudson.model.Fingerprint.BuildPtr;
@@ -486,12 +487,12 @@ public abstract class AbstractBuild<P extends AbstractProject<P,R>,R extends Abs
             
             assert builtOn==null;
             builtOn = node.getNodeName();
-            hudsonVersion = Jenkins.VERSION;
+            hudsonVersion = JenkinsImpl.VERSION;
             this.listener = listener;
 
             launcher = createLauncher(listener);
             if (!Jenkins.getInstance().getNodes().isEmpty()) {
-                if (node instanceof Jenkins) {
+                if (node instanceof JenkinsImpl) {
                     listener.getLogger().print(Messages.AbstractBuild_BuildingOnMaster());
                 } else {
                     listener.getLogger().print(Messages.AbstractBuild_BuildingRemotely(ModelHyperlinkNote.encodeTo("/computer/" + builtOn, builtOn)));

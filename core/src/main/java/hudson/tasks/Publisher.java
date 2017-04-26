@@ -33,6 +33,7 @@ import hudson.model.Describable;
 import hudson.model.Project;
 import hudson.model.Descriptor;
 import jenkins.model.Jenkins;
+import jenkins.model.JenkinsImpl;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -129,7 +130,7 @@ public abstract class Publisher extends BuildStepCompatibilityLayer implements D
      */
     public static final class DescriptorExtensionListImpl extends DescriptorExtensionList<Publisher,Descriptor<Publisher>>
             implements Comparator<ExtensionComponent<Descriptor<Publisher>>> {
-        public DescriptorExtensionListImpl(Jenkins hudson) {
+        public DescriptorExtensionListImpl(JenkinsImpl hudson) {
             super(hudson,Publisher.class);
         }
 

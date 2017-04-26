@@ -35,7 +35,7 @@ public class Configuration {
     }
 
     public static String getStringConfigParameter(String name, String defaultValue) {
-        String value = SystemProperties.getString(Jenkins.class.getName()+"." + name);
+        String value = SystemProperties.getString(JenkinsImpl.class.getName()+"." + name);
         if( value == null )
             value = SystemProperties.getString(Hudson.class.getName()+"." + name);
         return (value==null)?defaultValue:value;

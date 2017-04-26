@@ -1,6 +1,6 @@
 package hudson.security
 
-import jenkins.model.Jenkins
+import jenkins.model.JenkinsImpl
 import org.acegisecurity.AuthenticationException
 import org.acegisecurity.BadCredentialsException
 import org.acegisecurity.GrantedAuthority
@@ -16,10 +16,6 @@ import org.junit.Test
 import org.jvnet.hudson.test.JenkinsRule
 import org.jvnet.hudson.test.LoggerRule
 import org.springframework.dao.DataAccessException
-
-import java.util.logging.Handler
-import java.util.logging.LogRecord
-import java.util.logging.Logger
 
 import static java.util.logging.Level.FINEST
 
@@ -113,7 +109,7 @@ class TokenBasedRememberMeServices2Test {
         assert failureInduced
         // but we should have logged in
         wc.executeOnServer {
-            def a = Jenkins.getAuthentication()
+            def a = JenkinsImpl.getAuthentication()
             assert a.name=="bob"
             assert a.authorities*.authority.join(":")=="authenticated:myteam"
         }

@@ -23,6 +23,7 @@
  */
 package hudson.cli;
 
+import jenkins.model.JenkinsImpl;
 import org.kohsuke.args4j.Argument;
 
 import jenkins.model.Jenkins;
@@ -49,7 +50,7 @@ public class CreateViewCommand extends CLICommand {
     @Override
     protected int run() throws Exception {
 
-        final Jenkins jenkins = Jenkins.getActiveInstance();
+        final JenkinsImpl jenkins = Jenkins.getActiveInstance();
         jenkins.checkPermission(View.CREATE);
 
         View newView;

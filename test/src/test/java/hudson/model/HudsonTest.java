@@ -41,7 +41,7 @@ import hudson.security.SecurityRealm;
 import hudson.tasks.Ant;
 import hudson.tasks.BuildStep;
 import hudson.tasks.Ant.AntInstallation;
-import jenkins.model.Jenkins;
+import jenkins.model.JenkinsImpl;
 import org.junit.Rule;
 import org.junit.Test;
 import org.jvnet.hudson.test.Email;
@@ -203,7 +203,7 @@ public class HudsonTest {
     @Test
     @Issue("JENKINS-6938")
     public void invalidPrimaryView() throws Exception {
-        Field pv = Jenkins.class.getDeclaredField("primaryView");
+        Field pv = JenkinsImpl.class.getDeclaredField("primaryView");
         pv.setAccessible(true);
         String value = null;
         pv.set(j.jenkins, value);

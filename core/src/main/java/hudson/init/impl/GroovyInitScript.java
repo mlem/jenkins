@@ -24,7 +24,7 @@
 package hudson.init.impl;
 
 import hudson.init.Initializer;
-import jenkins.model.Jenkins;
+import jenkins.model.JenkinsImpl;
 import jenkins.util.groovy.GroovyHookScript;
 
 
@@ -37,7 +37,7 @@ import static hudson.init.InitMilestone.*;
  */
 public class GroovyInitScript {
     @Initializer(after=JOB_LOADED)
-    public static void init(Jenkins j) {
+    public static void init(JenkinsImpl j) {
         new GroovyHookScript("init", j.servletContext, j.getRootDir(), j.getPluginManager().uberClassLoader).run();
     }
 }

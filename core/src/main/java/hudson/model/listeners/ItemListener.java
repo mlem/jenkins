@@ -24,7 +24,6 @@
 package hudson.model.listeners;
 
 import com.google.common.base.Function;
-import hudson.AbortException;
 import hudson.ExtensionPoint;
 import hudson.ExtensionList;
 import hudson.Extension;
@@ -35,7 +34,8 @@ import hudson.model.Items;
 import hudson.security.ACL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.acegisecurity.AccessDeniedException;
+
+import jenkins.model.JenkinsImpl;
 
 /**
  * Receives notifications about CRUD operations of {@link Item}.
@@ -48,7 +48,7 @@ public class ItemListener implements ExtensionPoint {
     private static final Logger LOGGER = Logger.getLogger(ItemListener.class.getName());
 
     /**
-     * Called after a new job is created and added to {@link jenkins.model.Jenkins},
+     * Called after a new job is created and added to {@link JenkinsImpl},
      * before the initial configuration page is provided.
      * <p>
      * This is useful for changing the default initial configuration of newly created jobs.
@@ -89,7 +89,7 @@ public class ItemListener implements ExtensionPoint {
     }
 
     /**
-     * Called after all the jobs are loaded from disk into {@link jenkins.model.Jenkins}
+     * Called after all the jobs are loaded from disk into {@link JenkinsImpl}
      * object.
      */
     public void onLoaded() {

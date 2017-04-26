@@ -30,6 +30,7 @@ import java.nio.charset.Charset;
 import java.security.interfaces.RSAPublicKey;
 import javax.annotation.Nullable;
 import jenkins.model.Jenkins;
+import jenkins.model.JenkinsImpl;
 import jenkins.model.identity.InstanceIdentityProvider;
 import jenkins.util.SystemProperties;
 import hudson.slaves.OfflineCause;
@@ -266,8 +267,8 @@ public final class TcpSlaveAgentListener extends Thread {
                     o.write("Content-Type: text/plain;charset=UTF-8\r\n");
                     o.write("\r\n");
                     o.write("Jenkins-Agent-Protocols: " + getAgentProtocolNames()+"\r\n");
-                    o.write("Jenkins-Version: " + Jenkins.VERSION + "\r\n");
-                    o.write("Jenkins-Session: " + Jenkins.SESSION_HASH + "\r\n");
+                    o.write("Jenkins-Version: " + JenkinsImpl.VERSION + "\r\n");
+                    o.write("Jenkins-Session: " + JenkinsImpl.SESSION_HASH + "\r\n");
                     o.write("Client: " + s.getInetAddress().getHostAddress() + "\r\n");
                     o.write("Server: " + s.getLocalAddress().getHostAddress() + "\r\n");
                     o.flush();

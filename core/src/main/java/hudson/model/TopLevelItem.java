@@ -25,9 +25,10 @@ package hudson.model;
 
 import hudson.Extension;
 import hudson.ExtensionPoint;
+import jenkins.model.JenkinsImpl;
 
 /**
- * {@link Item} that can be directly displayed under {@link jenkins.model.Jenkins} or other containers.
+ * {@link Item} that can be directly displayed under {@link JenkinsImpl} or other containers.
  * (A "container" would be any {@link ItemGroup}{@code <TopLevelItem>}, such as a folder of projects.)
  * Ones that don't need to be under specific parent (say, unlike {@code MatrixConfiguration}),
  * and thus can be freely moved, copied, etc.

@@ -31,6 +31,8 @@ import java.io.StringWriter;
 import java.io.Writer;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
+
+import jenkins.model.JenkinsImpl;
 import org.kohsuke.stapler.HttpResponse;
 import org.kohsuke.stapler.QueryParameter;
 
@@ -57,7 +59,7 @@ import org.kohsuke.stapler.QueryParameter;
  *
  * @author Kohsuke Kawaguchi
  * @since 1.391
- * @see jenkins.model.Jenkins#getMarkupFormatter()
+ * @see JenkinsImpl#getMarkupFormatter()
  */
 public abstract class MarkupFormatter extends AbstractDescribableImpl<MarkupFormatter> implements ExtensionPoint {
     /**

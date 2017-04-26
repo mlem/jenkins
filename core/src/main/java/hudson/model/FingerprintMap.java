@@ -26,6 +26,7 @@ package hudson.model;
 import hudson.Util;
 import hudson.util.KeyedDataStorage;
 import jenkins.model.Jenkins;
+import jenkins.model.JenkinsImpl;
 
 import java.io.File;
 import java.io.IOException;
@@ -42,7 +43,7 @@ import javax.annotation.Nonnull;
  * will be adequately GC-ed to prevent memory leak.
  *
  * @author Kohsuke Kawaguchi
- * @see Jenkins#getFingerprintMap()
+ * @see JenkinsImpl#getFingerprintMap()
  */
 public final class FingerprintMap extends KeyedDataStorage<Fingerprint,FingerprintMap.FingerprintParams> {
 

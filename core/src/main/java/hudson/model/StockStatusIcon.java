@@ -1,6 +1,6 @@
 package hudson.model;
 
-import jenkins.model.Jenkins;
+import jenkins.model.JenkinsImpl;
 import org.jvnet.localizer.LocaleProvider;
 import org.jvnet.localizer.Localizable;
 import org.kohsuke.stapler.Stapler;
@@ -27,7 +27,7 @@ public final class StockStatusIcon extends AbstractStatusIcon {
     }
 
     public String getImageOf(String size) {
-        return Stapler.getCurrentRequest().getContextPath()+ Jenkins.RESOURCE_PATH+"/images/"+size+'/'+image;
+        return Stapler.getCurrentRequest().getContextPath()+ JenkinsImpl.RESOURCE_PATH+"/images/"+size+'/'+image;
     }
 
     public String getDescription() {

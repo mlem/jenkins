@@ -24,6 +24,7 @@
 package jenkins.security;
 
 import hudson.Extension;
+import jenkins.model.JenkinsImpl;
 import jenkins.util.SystemProperties;
 import hudson.Util;
 import hudson.model.Descriptor.FormException;
@@ -63,7 +64,7 @@ public class ApiTokenProperty extends UserProperty {
     private volatile Secret apiToken;
 
     /**
-     * If enabled, shows API tokens to users with {@link Jenkins#ADMINISTER) permissions.
+     * If enabled, shows API tokens to users with {@link JenkinsImpl#ADMINISTER) permissions.
      * Disabled by default due to the security reasons.
      * If enabled, it restores the original Jenkins behavior (SECURITY-200).
      * @since 1.638
@@ -88,7 +89,7 @@ public class ApiTokenProperty extends UserProperty {
     /**
      * Gets the API token.
      * The method performs security checks since 1.638. Only the current user and SYSTEM may see it.
-     * Users with {@link Jenkins#ADMINISTER} may be allowed to do it using {@link #SHOW_TOKEN_TO_ADMINS}.
+     * Users with {@link JenkinsImpl#ADMINISTER} may be allowed to do it using {@link #SHOW_TOKEN_TO_ADMINS}.
      * 
      * @return API Token. Never null, but may be {@link Messages#ApiTokenProperty_ChangeToken_TokenIsHidden()}
      *         if the user has no appropriate permissions.
@@ -120,7 +121,7 @@ public class ApiTokenProperty extends UserProperty {
     }
     
     private boolean hasPermissionToSeeToken() {
-        final Jenkins jenkins = Jenkins.getInstance();
+        final JenkinsImpl jenkins = Jenkins.getInstance();
 
         // Administrators can do whatever they want
         if (SHOW_TOKEN_TO_ADMINS && jenkins.hasPermission(Jenkins.ADMINISTER)) {

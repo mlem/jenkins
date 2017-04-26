@@ -4,6 +4,7 @@ import hudson.FilePath;
 import hudson.remoting.Channel;
 import hudson.util.Secret;
 import jenkins.model.Jenkins;
+import jenkins.model.JenkinsImpl;
 import jenkins.security.MasterToSlaveCallable;
 import org.acegisecurity.Authentication;
 import org.acegisecurity.AuthenticationException;
@@ -62,7 +63,7 @@ public class ClientAuthenticationCache implements Serializable {
     /**
      * Gets the persisted authentication for this Jenkins.
      *
-     * @return {@link jenkins.model.Jenkins#ANONYMOUS} if no such credential is found, or if the stored credential is invalid.
+     * @return {@link JenkinsImpl#ANONYMOUS} if no such credential is found, or if the stored credential is invalid.
      */
     public Authentication get() {
         Jenkins h = Jenkins.getActiveInstance();

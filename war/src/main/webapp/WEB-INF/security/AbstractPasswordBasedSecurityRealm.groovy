@@ -27,7 +27,7 @@
 import org.acegisecurity.providers.ProviderManager
 import org.acegisecurity.providers.anonymous.AnonymousAuthenticationProvider
 import org.acegisecurity.providers.rememberme.RememberMeAuthenticationProvider
-import jenkins.model.Jenkins
+import jenkins.model.JenkinsImpl
 
 authenticationManager(ProviderManager) {
     providers = [
@@ -37,7 +37,7 @@ authenticationManager(ProviderManager) {
 
         // these providers apply everywhere
         bean(RememberMeAuthenticationProvider) {
-            key = Jenkins.getInstance().getSecretKey();
+            key = JenkinsImpl.getInstance().getSecretKey();
         },
         // this doesn't mean we allow anonymous access.
         // we just authenticate anonymous users as such,

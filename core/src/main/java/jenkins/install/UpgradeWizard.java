@@ -11,6 +11,7 @@ import java.util.logging.Logger;
 import javax.inject.Provider;
 import javax.servlet.http.HttpSession;
 
+import jenkins.model.JenkinsImpl;
 import org.apache.commons.io.FileUtils;
 import org.kohsuke.accmod.Restricted;
 import org.kohsuke.accmod.restrictions.NoExternalUse;
@@ -97,7 +98,7 @@ public class UpgradeWizard extends InstallState {
 
         // only show when Jenkins is fully up & running
         WebApp wa = WebApp.getCurrent();
-        if (wa==null || !(wa.getApp() instanceof Jenkins))
+        if (wa==null || !(wa.getApp() instanceof JenkinsImpl))
             return false;
 
         return System.currentTimeMillis() > SetupWizard.getUpdateStateFile().lastModified();

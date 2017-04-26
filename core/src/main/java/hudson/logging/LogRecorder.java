@@ -39,6 +39,7 @@ import hudson.slaves.ComputerListener;
 import hudson.util.CopyOnWriteList;
 import hudson.util.RingBufferLogHandler;
 import hudson.util.XStream2;
+import jenkins.model.JenkinsImpl;
 import jenkins.security.MasterToSlaveCallable;
 import net.sf.json.JSONObject;
 import org.kohsuke.stapler.*;
@@ -64,7 +65,7 @@ import org.kohsuke.accmod.restrictions.NoExternalUse;
  *
  * <h3>Access Control</h3>
  * {@link LogRecorder} is only visible for administrators, and this access control happens at
- * {@link jenkins.model.Jenkins#getLog()}, the sole entry point for binding {@link LogRecorder} to URL.
+ * {@link JenkinsImpl#getLog()}, the sole entry point for binding {@link LogRecorder} to URL.
  *
  * @author Kohsuke Kawaguchi
  * @see LogRecorderManager

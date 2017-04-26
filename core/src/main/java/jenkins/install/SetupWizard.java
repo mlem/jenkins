@@ -20,6 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
 import javax.servlet.http.HttpServletResponse;
 
+import jenkins.model.JenkinsImpl;
 import jenkins.util.SystemProperties;
 import org.acegisecurity.Authentication;
 import org.acegisecurity.context.SecurityContextHolder;
@@ -88,7 +89,7 @@ public class SetupWizard extends PageDecorator {
      * Initialize the setup wizard, this will process any current state initializations
      */
     /*package*/ void init(boolean newInstall) throws IOException, InterruptedException {
-        Jenkins jenkins = Jenkins.getInstance();
+        JenkinsImpl jenkins = Jenkins.getInstance();
         
         if(newInstall) {
             // this was determined to be a new install, don't run the update wizard here
@@ -120,7 +121,7 @@ public class SetupWizard extends PageDecorator {
                     jenkins.setAuthorizationStrategy(authStrategy);
     
                     // Disable jnlp by default, but honor system properties
-                    jenkins.setSlaveAgentPort(SystemProperties.getInteger(Jenkins.class.getName()+".slaveAgentPort",-1));
+                    jenkins.setSlaveAgentPort(SystemProperties.getInteger(JenkinsImpl.class.getName()+".slaveAgentPort",-1));
 
                     // Disable CLI over Remoting
                     CLI.get().setEnabled(false);
@@ -219,7 +220,7 @@ public class SetupWizard extends PageDecorator {
      * Called during the initial setup to create an admin user
      */
     public void doCreateAdminUser(StaplerRequest req, StaplerResponse rsp) throws IOException, ServletException {
-        Jenkins j = Jenkins.getInstance();
+        JenkinsImpl j = Jenkins.getInstance();
         j.checkPermission(Jenkins.ADMINISTER);
         
         // This will be set up by default. if not, something changed, ok to fail

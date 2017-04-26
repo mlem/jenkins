@@ -50,6 +50,7 @@ import java.util.List;
 import java.util.regex.Pattern;
 import javax.annotation.CheckForNull;
 import jenkins.model.Jenkins;
+import jenkins.model.JenkinsImpl;
 import jenkins.util.JenkinsJVM;
 import jenkins.util.SystemProperties;
 import org.apache.commons.httpclient.Credentials;
@@ -75,7 +76,7 @@ import org.kohsuke.stapler.QueryParameter;
  * <a href="http://java.sun.com/javase/6/docs/technotes/guides/net/http-auth.html">
  * Http Authentication</a>).
  *
- * @see jenkins.model.Jenkins#proxy
+ * @see JenkinsImpl#proxy
  */
 public final class ProxyConfiguration extends AbstractDescribableImpl<ProxyConfiguration> implements Saveable, Serializable {
     /**
@@ -293,7 +294,7 @@ public final class ProxyConfiguration extends AbstractDescribableImpl<ProxyConfi
     private static ProxyConfiguration _get() {
         JenkinsJVM.checkJenkinsJVM();
         // this code could be called between the JVM flag being set and theInstance initialized
-        Jenkins jenkins = Jenkins.getInstance();
+        JenkinsImpl jenkins = Jenkins.getInstance();
         return jenkins == null ? null : jenkins.proxy;
     }
 

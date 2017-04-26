@@ -2,6 +2,7 @@ package hudson.init.impl;
 
 import hudson.init.Initializer;
 import jenkins.model.Jenkins;
+import jenkins.model.JenkinsImpl;
 import org.kohsuke.stapler.WebApp;
 import org.kohsuke.stapler.compression.CompressionFilter;
 import org.kohsuke.stapler.compression.UncaughtExceptionHandler;
@@ -21,7 +22,7 @@ import org.kohsuke.stapler.Stapler;
  */
 public class InstallUncaughtExceptionHandler {
     @Initializer
-    public static void init(final Jenkins j) throws IOException {
+    public static void init(final JenkinsImpl j) throws IOException {
         CompressionFilter.setUncaughtExceptionHandler(j.servletContext, new UncaughtExceptionHandler() {
             @Override
             public void reportException(Throwable e, ServletContext context, HttpServletRequest req, HttpServletResponse rsp) throws ServletException, IOException {

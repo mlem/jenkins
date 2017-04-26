@@ -24,8 +24,8 @@
 package hudson.model;
 
 import hudson.ExtensionList;
+import jenkins.model.JenkinsImpl;
 import jenkins.util.xml.FilteredFunctionContext;
-import jenkins.model.Jenkins;
 import jenkins.security.SecureRequester;
 
 import org.dom4j.CharacterData;
@@ -229,8 +229,8 @@ public class Api extends AbstractModelObject {
     }
 
     private void setHeaders(StaplerResponse rsp) {
-        rsp.setHeader("X-Jenkins", Jenkins.VERSION);
-        rsp.setHeader("X-Jenkins-Session", Jenkins.SESSION_HASH);
+        rsp.setHeader("X-Jenkins", JenkinsImpl.VERSION);
+        rsp.setHeader("X-Jenkins-Session", JenkinsImpl.SESSION_HASH);
     }
 
     private static final Logger LOGGER = Logger.getLogger(Api.class.getName());

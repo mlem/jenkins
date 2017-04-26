@@ -12,7 +12,7 @@ import java.io.IOException;
  * Adds the {@link Cloud} configuration to the system config page.
  *
  * <p>
- * This object just acts as a proxy to configure {@link Jenkins#clouds}
+ * This object just acts as a proxy to configure {@link JenkinsImpl#clouds}
  *
  * @author Kohsuke Kawaguchi
  */

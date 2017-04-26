@@ -25,6 +25,7 @@
 package hudson.model;
 
 import hudson.Functions;
+import jenkins.model.JenkinsImpl;
 import jenkins.util.SystemProperties;
 import hudson.security.PermissionScope;
 import jenkins.util.io.OnMaster;
@@ -45,7 +46,7 @@ import hudson.util.Secret;
  * <p>
  * Every {@link Item} is hosted in an {@link ItemGroup} called "parent",
  * and some {@link Item}s are {@link ItemGroup}s. This form a tree
- * structure, which is rooted at {@link jenkins.model.Jenkins}.
+ * structure, which is rooted at {@link JenkinsImpl}.
  *
  * <p>
  * Unlike file systems, where a file can be moved from one directory
@@ -62,7 +63,7 @@ import hudson.util.Secret;
  * <p>
  * {@link Item}s have unique {@link #getName() name}s that distinguish themselves
  * among their siblings uniquely. The names can be combined by '/' to form an
- * item full name, which uniquely identifies an {@link Item} inside the whole {@link jenkins.model.Jenkins}.
+ * item full name, which uniquely identifies an {@link Item} inside the whole {@link JenkinsImpl}.
  *
  * @author Kohsuke Kawaguchi
  * @see Items
@@ -99,11 +100,11 @@ public interface Item extends PersistenceRoot, SearchableModelObject, AccessCont
      *
      * <p>
      * Full name consists of {@link #getName() name}s of {@link Item}s
-     * that lead from the root {@link jenkins.model.Jenkins} to this {@link Item},
+     * that lead from the root {@link JenkinsImpl} to this {@link Item},
      * separated by '/'. This is the unique name that identifies this
-     * {@link Item} inside the whole {@link jenkins.model.Jenkins}.
+     * {@link Item} inside the whole {@link JenkinsImpl}.
      *
-     * @see jenkins.model.Jenkins#getItemByFullName(String,Class)
+     * @see JenkinsImpl#getItemByFullName(String,Class)
      */
     String getFullName();
 

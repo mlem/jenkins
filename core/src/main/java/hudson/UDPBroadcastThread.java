@@ -23,6 +23,7 @@
  */
 package hudson;
 
+import jenkins.model.JenkinsImpl;
 import jenkins.util.SystemProperties;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import hudson.model.Hudson;
@@ -89,7 +90,7 @@ public class UDPBroadcastThread extends Thread {
                 TcpSlaveAgentListener tal = jenkins.getTcpSlaveAgentListener();
 
                 StringBuilder rsp = new StringBuilder("<hudson>");
-                tag(rsp,"version", Jenkins.VERSION);
+                tag(rsp,"version", JenkinsImpl.VERSION);
                 tag(rsp,"url", jenkins.getRootUrl());
                 tag(rsp,"server-id", jenkins.getLegacyInstanceId());
                 tag(rsp,"slave-port",tal==null?null:tal.getPort());

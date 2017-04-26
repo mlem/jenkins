@@ -31,8 +31,8 @@ import hudson.model.Slave;
 import hudson.model.User;
 import jenkins.model.Jenkins;
 
+import jenkins.model.JenkinsImpl;
 import org.kohsuke.args4j.Argument;
-import org.kohsuke.args4j.CmdLineException;
 
 /**
  * @author ogondza
@@ -53,7 +53,7 @@ public class CreateNodeCommand extends CLICommand {
     @Override
     protected int run() throws Exception {
 
-        final Jenkins jenkins = Jenkins.getActiveInstance();
+        final JenkinsImpl jenkins = Jenkins.getActiveInstance();
         jenkins.checkPermission(Computer.CREATE);
 
         final Node newNode = (Node) Jenkins.XSTREAM2.fromXML(stdin);

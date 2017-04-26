@@ -40,6 +40,7 @@ import java.util.logging.LogRecord;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import jenkins.model.Jenkins;
+import jenkins.model.JenkinsImpl;
 import org.apache.commons.io.IOUtils;
 import static org.junit.Assert.*;
 import org.junit.Ignore;
@@ -122,9 +123,9 @@ public class FunctionsTest {
     }
     
     @Test
-    @PrepareForTest({Stapler.class, Jenkins.class})
+    @PrepareForTest({Stapler.class, JenkinsImpl.class})
     public void testGetRelativeLinkTo_JobContainedInView() throws Exception{
-        Jenkins j = createMockJenkins();
+        JenkinsImpl j = createMockJenkins();
         ItemGroup parent = j;
         String contextPath = "/jenkins";
         StaplerRequest req = createMockRequest(contextPath);
@@ -141,9 +142,9 @@ public class FunctionsTest {
 
     @Test
     @Ignore
-    @PrepareForTest({Stapler.class, Jenkins.class})
+    @PrepareForTest({Stapler.class, JenkinsImpl.class})
     public void testGetRelativeLinkTo_JobFromComputer() throws Exception{
-        Jenkins j = createMockJenkins();
+        JenkinsImpl j = createMockJenkins();
         ItemGroup parent = j;
         String contextPath = "/jenkins";
         StaplerRequest req = createMockRequest(contextPath);
@@ -158,9 +159,9 @@ public class FunctionsTest {
 
     @Ignore("too expensive to make it correct")
     @Test
-    @PrepareForTest({Stapler.class, Jenkins.class})
+    @PrepareForTest({Stapler.class, JenkinsImpl.class})
     public void testGetRelativeLinkTo_JobNotContainedInView() throws Exception{
-        Jenkins j = createMockJenkins();
+        JenkinsImpl j = createMockJenkins();
         ItemGroup parent = j;
         String contextPath = "/jenkins";
         StaplerRequest req = createMockRequest(contextPath);
@@ -178,7 +179,7 @@ public class FunctionsTest {
     private interface TopLevelItemAndItemGroup <T extends TopLevelItem> extends TopLevelItem, ItemGroup<T> {}
     
     @Test
-    @PrepareForTest({Stapler.class,Jenkins.class})
+    @PrepareForTest({Stapler.class,JenkinsImpl.class})
     public void testGetRelativeLinkTo_JobContainedInViewWithinItemGroup() throws Exception{
         Jenkins j = createMockJenkins();
         TopLevelItemAndItemGroup parent = mock(TopLevelItemAndItemGroup.class);
@@ -197,7 +198,7 @@ public class FunctionsTest {
     }
 
     @Issue("JENKINS-17713")
-    @PrepareForTest({Stapler.class, Jenkins.class})
+    @PrepareForTest({Stapler.class, JenkinsImpl.class})
     @Test public void getRelativeLinkTo_MavenModules() throws Exception {
         Jenkins j = createMockJenkins();
         StaplerRequest req = createMockRequest("/jenkins");
@@ -227,7 +228,7 @@ public class FunctionsTest {
         when(i.getName()).thenReturn("jobName");
         when(i.getDisplayName()).thenReturn("displayName");
         TopLevelItemAndItemGroup ig = mock(TopLevelItemAndItemGroup.class);
-        ItemGroup j = mock(Jenkins.class);
+        ItemGroup j = mock(JenkinsImpl.class);
         when(ig.getName()).thenReturn("parent");
         when(ig.getDisplayName()).thenReturn("parentDisplay");
         when(ig.getParent()).thenReturn(j);
@@ -258,9 +259,9 @@ public class FunctionsTest {
         return i;
     }
 
-    private Jenkins createMockJenkins() {
-        mockStatic(Jenkins.class);
-        Jenkins j = mock(Jenkins.class);
+    private JenkinsImpl createMockJenkins() {
+        mockStatic(JenkinsImpl.class);
+        JenkinsImpl j = mock(JenkinsImpl.class);
         when(Jenkins.getInstance()).thenReturn(j);
         return j;
     }

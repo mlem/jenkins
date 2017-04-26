@@ -64,6 +64,8 @@ import hudson.model.queue.WorkUnitContext;
 import hudson.security.ACL;
 import hudson.security.AccessControlled;
 import java.nio.file.Files;
+
+import jenkins.model.JenkinsImpl;
 import jenkins.security.QueueItemAuthenticatorProvider;
 import jenkins.util.Timer;
 import hudson.triggers.SafeTimerTask;
@@ -74,7 +76,6 @@ import hudson.util.ConsistentHash.Hash;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.lang.ref.WeakReference;
@@ -1709,9 +1710,9 @@ public class Queue extends ResourceController implements Saveable {
     }
 
     /**
-     * Checks whether a task should not be scheduled because {@link Jenkins#isQuietingDown()}.
+     * Checks whether a task should not be scheduled because {@link JenkinsImpl#isQuietingDown()}.
      * @param task some queue task
-     * @return true if {@link Jenkins#isQuietingDown()} unless this is a {@link NonBlockingTask}
+     * @return true if {@link JenkinsImpl#isQuietingDown()} unless this is a {@link NonBlockingTask}
      * @since 1.598
      */
     public static boolean isBlockedByShutdown(Task task) {
@@ -1736,7 +1737,7 @@ public class Queue extends ResourceController implements Saveable {
     public interface FlyweightTask extends Task {}
 
     /**
-     * Marks {@link Task}s that are not affected by the {@linkplain Jenkins#isQuietingDown()}  quieting down},
+     * Marks {@link Task}s that are not affected by the {@linkplain JenkinsImpl#isQuietingDown()}  quieting down},
      * because these tasks keep other tasks executing.
      * @see #isBlockedByShutdown
      * @since 1.336

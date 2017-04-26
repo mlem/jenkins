@@ -27,10 +27,11 @@ import hudson.security.ACLContext;
 import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.StandardOpenOption;
+
+import jenkins.model.JenkinsImpl;
 import jenkins.util.SystemProperties;
 import com.thoughtworks.xstream.converters.reflection.PureJavaReflectionProvider;
 import com.thoughtworks.xstream.core.JVM;
-import com.trilead.ssh2.util.IOUtils;
 import hudson.model.Hudson;
 import hudson.security.ACL;
 import hudson.util.BootFailure;
@@ -61,7 +62,6 @@ import javax.servlet.ServletResponse;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.TransformerFactoryConfigurationError;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.net.URLClassLoader;
@@ -96,7 +96,7 @@ public class WebAppMain implements ServletContextListener {
     private Thread initThread;
 
     /**
-     * Creates the sole instance of {@link jenkins.model.Jenkins} and register it to the {@link ServletContext}.
+     * Creates the sole instance of {@link JenkinsImpl} and register it to the {@link ServletContext}.
      */
     public void contextInitialized(ServletContextEvent event) {
         JenkinsJVMAccess._setJenkinsJVM(true);
@@ -292,7 +292,7 @@ public class WebAppMain implements ServletContextListener {
      */
     @edu.umd.cs.findbugs.annotations.SuppressFBWarnings("LG_LOST_LOGGER_DUE_TO_WEAK_REFERENCE")
     private void installLogger() {
-        Jenkins.logRecords = handler.getView();
+        JenkinsImpl.logRecords = handler.getView();
         Logger.getLogger("").addHandler(handler);
     }
 

@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.jar.Attributes;
 import java.util.jar.Manifest;
 
-import jenkins.model.Jenkins;
+import jenkins.model.JenkinsImpl;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.invocation.InvocationOnMock;
@@ -26,7 +26,7 @@ public class PluginWrapperTest {
 
     @Before
     public void before() throws Exception {
-        Jenkins.VERSION = "2.0"; // Some value needed - tests will overwrite if necessary
+        JenkinsImpl.VERSION = "2.0"; // Some value needed - tests will overwrite if necessary
     }
 
     @Test

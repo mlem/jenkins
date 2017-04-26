@@ -46,6 +46,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
+
+import jenkins.model.JenkinsImpl;
 import jenkins.util.io.OnMaster;
 
 /**
@@ -57,17 +59,17 @@ import jenkins.util.io.OnMaster;
  * manual registration,
  *
  * <p>
- * All {@link ExtensionList} instances should be owned by {@link jenkins.model.Jenkins}, even though
- * extension points can be defined by anyone on any type. Use {@link jenkins.model.Jenkins#getExtensionList(Class)}
- * and {@link jenkins.model.Jenkins#getDescriptorList(Class)} to obtain the instances.
+ * All {@link ExtensionList} instances should be owned by {@link JenkinsImpl}, even though
+ * extension points can be defined by anyone on any type. Use {@link JenkinsImpl#getExtensionList(Class)}
+ * and {@link JenkinsImpl#getDescriptorList(Class)} to obtain the instances.
  *
  * @param <T>
  *      Type of the extension point. This class holds instances of the subtypes of 'T'. 
  *
  * @author Kohsuke Kawaguchi
  * @since 1.286
- * @see jenkins.model.Jenkins#getExtensionList(Class)
- * @see jenkins.model.Jenkins#getDescriptorList(Class)
+ * @see JenkinsImpl#getExtensionList(Class)
+ * @see JenkinsImpl#getDescriptorList(Class)
  */
 public class ExtensionList<T> extends AbstractList<T> implements OnMaster {
     /**
@@ -76,7 +78,8 @@ public class ExtensionList<T> extends AbstractList<T> implements OnMaster {
      */
     @Deprecated
     public final Hudson hudson;
-    public final @CheckForNull Jenkins jenkins;
+    public final @CheckForNull
+    JenkinsImpl jenkins;
     public final Class<T> extensionType;
 
     /**
@@ -99,10 +102,10 @@ public class ExtensionList<T> extends AbstractList<T> implements OnMaster {
      */
     @Deprecated
     protected ExtensionList(Hudson hudson, Class<T> extensionType) {
-        this((Jenkins)hudson,extensionType);
+        this((JenkinsImpl)hudson,extensionType);
     }
 
-    protected ExtensionList(Jenkins jenkins, Class<T> extensionType) {
+    protected ExtensionList(JenkinsImpl jenkins, Class<T> extensionType) {
         this(jenkins,extensionType,new CopyOnWriteArrayList<ExtensionComponent<T>>());
     }
 
@@ -112,7 +115,7 @@ public class ExtensionList<T> extends AbstractList<T> implements OnMaster {
      */
     @Deprecated
     protected ExtensionList(Hudson hudson, Class<T> extensionType, CopyOnWriteArrayList<ExtensionComponent<T>> legacyStore) {
-        this((Jenkins)hudson,extensionType,legacyStore);
+        this((JenkinsImpl)hudson,extensionType,legacyStore);
     }
 
     /**
@@ -122,7 +125,7 @@ public class ExtensionList<T> extends AbstractList<T> implements OnMaster {
      *      omits this uses a new {@link Vector}, making the storage lifespan tied to the life of  {@link ExtensionList}.
      *      If the manually registered instances are scoped to VM level, the caller should pass in a static list. 
      */
-    protected ExtensionList(Jenkins jenkins, Class<T> extensionType, CopyOnWriteArrayList<ExtensionComponent<T>> legacyStore) {
+    protected ExtensionList(JenkinsImpl jenkins, Class<T> extensionType, CopyOnWriteArrayList<ExtensionComponent<T>> legacyStore) {
         this.hudson = (Hudson)jenkins;
         this.jenkins = jenkins;
         this.extensionType = extensionType;
@@ -316,7 +319,7 @@ public class ExtensionList<T> extends AbstractList<T> implements OnMaster {
     }
 
     /**
-     * Used during {@link Jenkins#refreshExtensions()} to add new components into existing {@link ExtensionList}s.
+     * Used during {@link JenkinsImpl#refreshExtensions()} to add new components into existing {@link ExtensionList}s.
      * Do not call from anywhere else.
      */
     public void refresh(ExtensionComponentSet delta) {
@@ -392,10 +395,10 @@ public class ExtensionList<T> extends AbstractList<T> implements OnMaster {
      */
     @Deprecated
     public static <T> ExtensionList<T> create(Hudson hudson, Class<T> type) {
-        return create((Jenkins)hudson,type);
+        return create((JenkinsImpl)hudson,type);
     }
 
-    public static <T> ExtensionList<T> create(Jenkins jenkins, Class<T> type) {
+    public static <T> ExtensionList<T> create(JenkinsImpl jenkins, Class<T> type) {
         if(type.getAnnotation(LegacyInstancesAreScopedToHudson.class)!=null)
             return new ExtensionList<T>(jenkins,type);
         else {
@@ -405,8 +408,8 @@ public class ExtensionList<T> extends AbstractList<T> implements OnMaster {
 
     /**
      * Gets the extension list for a given type.
-     * Normally calls {@link Jenkins#getExtensionList(Class)} but falls back to an empty list
-     * in case {@link Jenkins#getInstanceOrNull()} is null.
+     * Normally calls {@link JenkinsImpl#getExtensionList(Class)} but falls back to an empty list
+     * in case {@link JenkinsImpl#getInstanceOrNull()} is null.
      * Thus it is useful to call from {@code all()} methods which need to behave gracefully during startup or shutdown.
      * @param type the extension point type
      * @return some list
@@ -414,7 +417,7 @@ public class ExtensionList<T> extends AbstractList<T> implements OnMaster {
      */
     public static @Nonnull <T> ExtensionList<T> lookup(Class<T> type) {
         Jenkins j = Jenkins.getInstanceOrNull();
-        return j == null ? create((Jenkins) null, type) : j.getExtensionList(type);
+        return j == null ? create((JenkinsImpl) null, type) : j.getExtensionList(type);
     }
 
     /**

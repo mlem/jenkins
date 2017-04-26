@@ -33,6 +33,8 @@ import hudson.util.StreamTaskListener;
 import java.io.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import jenkins.model.JenkinsImpl;
 import org.apache.tools.ant.util.DeweyDecimal;
 
 /**
@@ -160,7 +162,7 @@ public abstract class ComputerLauncher extends AbstractDescribableImpl<ComputerL
      *
      * @deprecated as of 1.281
      *      Use {@link Extension} for registration, and use
-     *      {@link jenkins.model.Jenkins#getDescriptorList(Class)} for read access.
+     *      {@link JenkinsImpl#getDescriptorList(Class)} for read access.
      */
     @Deprecated
     public static final DescriptorList<ComputerLauncher> LIST = new DescriptorList<ComputerLauncher>(ComputerLauncher.class);

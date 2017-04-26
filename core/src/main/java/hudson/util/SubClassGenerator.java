@@ -25,6 +25,7 @@ package hudson.util;
 
 import hudson.PluginManager.UberClassLoader;
 import jenkins.model.Jenkins;
+import jenkins.model.JenkinsImpl;
 import org.kohsuke.asm5.ClassWriter;
 import org.kohsuke.asm5.MethodVisitor;
 import org.kohsuke.asm5.Type;
@@ -76,7 +77,7 @@ public class SubClassGenerator extends ClassLoader {
 
         Class<? extends T> c = defineClass(name, image, 0, image.length).asSubclass(base);
 
-        Jenkins h = Jenkins.getInstanceOrNull();
+        JenkinsImpl h = Jenkins.getInstanceOrNull();
         if (h!=null)    // null only during tests.
             ((UberClassLoader)h.pluginManager.uberClassLoader).addNamedClass(name,c); // can't change the field type as it breaks binary compatibility
         

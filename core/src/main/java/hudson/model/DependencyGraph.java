@@ -28,6 +28,7 @@ import jenkins.model.DependencyDeclarer;
 import com.google.common.collect.ImmutableList;
 import hudson.security.ACL;
 import jenkins.model.Jenkins;
+import jenkins.model.JenkinsImpl;
 import jenkins.util.DirectedGraph;
 import jenkins.util.DirectedGraph.SCC;
 import org.acegisecurity.context.SecurityContext;
@@ -65,7 +66,7 @@ import java.util.Stack;
  * there's a change (which is relatively rare), a new instance
  * will be created. This eliminates the need of synchronization.
  *
- * @see Jenkins#getDependencyGraph()
+ * @see JenkinsImpl#getDependencyGraph()
  * @author Kohsuke Kawaguchi
  */
 public class DependencyGraph implements Comparator<AbstractProject> {
@@ -411,7 +412,7 @@ public class DependencyGraph implements Comparator<AbstractProject> {
          * Decide whether build should be triggered and provide any Actions for the build.
          * Default implementation always returns true (for backward compatibility), and
          * adds no Actions. Subclasses may override to control how/if the build is triggered.
-         * <p>The authentication in effect ({@link Jenkins#getAuthentication}) will be that of the upstream build.
+         * <p>The authentication in effect ({@link JenkinsImpl#getAuthentication}) will be that of the upstream build.
          * An implementation is expected to perform any relevant access control checks:
          * that an upstream project can both see and build a downstream project,
          * or that a downstream project can see an upstream project.

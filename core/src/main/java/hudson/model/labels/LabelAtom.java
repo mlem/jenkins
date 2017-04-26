@@ -38,6 +38,7 @@ import jenkins.model.Jenkins;
 import hudson.model.Label;
 import hudson.model.Saveable;
 import hudson.model.listeners.SaveableListener;
+import jenkins.model.JenkinsImpl;
 import org.kohsuke.accmod.Restricted;
 import org.kohsuke.accmod.restrictions.DoNotUse;
 import org.kohsuke.stapler.StaplerRequest;
@@ -201,7 +202,7 @@ public class LabelAtom extends Label implements Saveable {
      */
     @RequirePOST
     public void doConfigSubmit( StaplerRequest req, StaplerResponse rsp ) throws IOException, ServletException, FormException {
-        final Jenkins app = Jenkins.getInstance();
+        final JenkinsImpl app = Jenkins.getInstance();
 
         app.checkPermission(Jenkins.ADMINISTER);
 
@@ -229,7 +230,7 @@ public class LabelAtom extends Label implements Saveable {
 
     /**
      * Obtains an atom by its {@linkplain #getName() name}.
-     * @see Jenkins#getLabelAtom
+     * @see JenkinsImpl#getLabelAtom
      */
     public static @Nullable LabelAtom get(@CheckForNull String l) {
         return Jenkins.getInstance().getLabelAtom(l);

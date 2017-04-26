@@ -25,6 +25,7 @@ package hudson;
 
 import jenkins.model.Jenkins;
 import hudson.util.CopyOnWriteList;
+import jenkins.model.JenkinsImpl;
 
 import java.util.AbstractList;
 import java.util.Iterator;
@@ -36,7 +37,7 @@ import java.util.Collection;
  *
  * <p>
  * Instances of this class can be created statically as a singleton, but it provides the view
- * to {@link ExtensionList} of the current {@link jenkins.model.Jenkins}.
+ * to {@link ExtensionList} of the current {@link JenkinsImpl}.
  * Write operations to this list will update the legacy instances on {@link ExtensionList}.
  *
  * <p>

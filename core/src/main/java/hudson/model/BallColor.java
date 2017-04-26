@@ -24,7 +24,7 @@
 package hudson.model;
 
 import hudson.util.ColorPalette;
-import jenkins.model.Jenkins;
+import jenkins.model.JenkinsImpl;
 import org.jenkins.ui.icon.Icon;
 import org.jvnet.localizer.LocaleProvider;
 import org.jvnet.localizer.Localizable;
@@ -112,7 +112,7 @@ public enum BallColor implements StatusIcon {
     }
 
     public String getImageOf(String size) {
-        return Stapler.getCurrentRequest().getContextPath()+ Jenkins.RESOURCE_PATH+"/images/"+size+'/'+image;
+        return Stapler.getCurrentRequest().getContextPath()+ JenkinsImpl.RESOURCE_PATH+"/images/"+size+'/'+image;
     }
 
     /**

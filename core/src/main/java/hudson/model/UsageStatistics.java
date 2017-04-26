@@ -32,6 +32,7 @@ import hudson.util.Secret;
 import static hudson.util.TimeUnit2.DAYS;
 
 import jenkins.model.Jenkins;
+import jenkins.model.JenkinsImpl;
 import net.sf.json.JSONObject;
 import org.apache.commons.io.output.ByteArrayOutputStream;
 import org.kohsuke.stapler.StaplerRequest;
@@ -122,13 +123,13 @@ public class UsageStatistics extends PageDecorator {
      * Gets the encrypted usage stat data to be sent to the Hudson server.
      */
     public String getStatData() throws IOException {
-        Jenkins j = Jenkins.getInstance();
+        JenkinsImpl j = Jenkins.getInstance();
 
         JSONObject o = new JSONObject();
         o.put("stat",1);
         o.put("install", j.getLegacyInstanceId());
         o.put("servletContainer", j.servletContext.getServerInfo());
-        o.put("version", Jenkins.VERSION);
+        o.put("version", JenkinsImpl.VERSION);
 
         List<JSONObject> nodes = new ArrayList<JSONObject>();
         for( Computer c : j.getComputers() ) {

@@ -43,6 +43,8 @@ import java.util.Vector;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import jenkins.model.JenkinsImpl;
 import org.kohsuke.accmod.Restricted;
 import org.kohsuke.accmod.restrictions.NoExternalUse;
 
@@ -96,7 +98,7 @@ public class PluginServletFilter implements Filter, ExtensionPoint {
     }
 
     public static void addFilter(Filter filter) throws ServletException {
-        Jenkins j = Jenkins.getInstanceOrNull();
+        JenkinsImpl j = Jenkins.getInstanceOrNull();
         
         PluginServletFilter container = null;
         if(j != null) {
@@ -114,7 +116,7 @@ public class PluginServletFilter implements Filter, ExtensionPoint {
     }
 
     public static void removeFilter(Filter filter) throws ServletException {
-        Jenkins j = Jenkins.getInstanceOrNull();
+        JenkinsImpl j = Jenkins.getInstanceOrNull();
         if (j==null || getInstance(j.servletContext) == null) {
             LEGACY.remove(filter);
         } else {

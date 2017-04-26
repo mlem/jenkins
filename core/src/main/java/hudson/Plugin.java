@@ -30,6 +30,7 @@ import hudson.model.Saveable;
 import hudson.model.listeners.ItemListener;
 import hudson.model.listeners.SaveableListener;
 import hudson.model.Descriptor.FormException;
+import jenkins.model.JenkinsImpl;
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
 
@@ -88,7 +89,7 @@ public abstract class Plugin implements Saveable {
      *      can be replaced by {@link GlobalConfiguration}
      * <li>{@link #start} and {@link #postInitialize} can be replaced by {@link Initializer} (or {@link ItemListener#onLoaded})
      * <li>{@link #stop} can be replaced by {@link Terminator}
-     * <li>{@link #setServletContext} can be replaced by {@link Jenkins#servletContext}
+     * <li>{@link #setServletContext} can be replaced by {@link JenkinsImpl#servletContext}
      * </ul>
      * Note that every plugin gets a {@link DummyImpl} by default,
      * which will still route the URL space, serve {@link #getWrapper}, and so on.
@@ -133,7 +134,7 @@ public abstract class Plugin implements Saveable {
      *
      * <p>
      * This method is called after {@link #setServletContext(ServletContext)} is invoked.
-     * You can also use {@link jenkins.model.Jenkins#getInstance()} to access the singleton hudson instance,
+     * You can also use {@link JenkinsImpl#getInstance()} to access the singleton hudson instance,
      * although the plugin start up happens relatively early in the initialization
      * stage and not all the data are loaded in Hudson.
      *

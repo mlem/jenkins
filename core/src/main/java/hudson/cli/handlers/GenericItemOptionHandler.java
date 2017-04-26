@@ -31,6 +31,7 @@ import hudson.security.ACLContext;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import jenkins.model.Jenkins;
+import jenkins.model.JenkinsImpl;
 import org.acegisecurity.Authentication;
 import org.kohsuke.args4j.CmdLineException;
 import org.kohsuke.args4j.CmdLineParser;
@@ -57,7 +58,7 @@ public abstract class GenericItemOptionHandler<T extends Item> extends OptionHan
     protected abstract Class<T> type();
 
     @Override public int parseArguments(Parameters params) throws CmdLineException {
-        final Jenkins j = Jenkins.getInstance();
+        final JenkinsImpl j = Jenkins.getInstance();
         final String src = params.getParameter(0);
         T s = j.getItemByFullName(src, type());
         if (s == null) {

@@ -27,12 +27,13 @@ import hudson.Extension;
 import hudson.init.InitMilestone;
 import hudson.model.AdministrativeMonitor;
 import jenkins.model.Jenkins;
+import jenkins.model.JenkinsImpl;
 import org.jenkinsci.Symbol;
 import org.kohsuke.accmod.Restricted;
 import org.kohsuke.accmod.restrictions.NoExternalUse;
 
 /**
- * Performs monitoring of {@link Jenkins} {@link InitMilestone} status.
+ * Performs monitoring of {@link JenkinsImpl} {@link InitMilestone} status.
  *
  * @author Oleg Nenashev
  * @since 2.21

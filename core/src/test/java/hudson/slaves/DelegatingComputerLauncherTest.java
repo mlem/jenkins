@@ -3,6 +3,7 @@ package hudson.slaves;
 import hudson.DescriptorExtensionList;
 import hudson.model.Descriptor;
 import jenkins.model.Jenkins;
+import jenkins.model.JenkinsImpl;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.powermock.api.mockito.PowerMockito;
@@ -47,10 +48,10 @@ public class DelegatingComputerLauncherTest {
     // Ensure that by default a DelegatingComputerLauncher subclass doesn't advertise the option to delegate another
     // DelegatingComputerLauncher
     @Test
-    @PrepareForTest(Jenkins.class)
+    @PrepareForTest(JenkinsImpl.class)
     public void testRecursionAvoidance() {
-        PowerMockito.mockStatic(Jenkins.class);
-        Jenkins mockJenkins = mock(Jenkins.class);
+        PowerMockito.mockStatic(JenkinsImpl.class);
+        Jenkins mockJenkins = mock(JenkinsImpl.class);
         PowerMockito.when(Jenkins.getInstance()).thenReturn(mockJenkins);
 
         DescriptorExtensionList<ComputerLauncher, Descriptor<ComputerLauncher>> mockList =
