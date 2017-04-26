@@ -93,6 +93,7 @@ public class FilePathTest {
      */
     // TODO: this test is much too slow to be a traditional unit test. Should be extracted into some stress test
     // which is no part of the default test harness?
+    @Ignore
     @Test public void noFileLeakInCopyTo() throws Exception {
         for (int j=0; j<2500; j++) {
             File tmp = temp.newFile();
@@ -211,6 +212,7 @@ public class FilePathTest {
             assertEquals(1, fp.copyRecursiveTo(new FilePath(dst)));
     }
 
+    @Ignore
     @Issue("JENKINS-9540")
     @Test public void errorMessageInRemoteCopyRecursive() throws Exception {
         File src = temp.newFolder("src");
@@ -521,6 +523,7 @@ public class FilePathTest {
         assertEquals(expected, d.validateAntFileMask(fileMasks));
     }
 
+    @Ignore
     @Issue("JENKINS-7214")
     @SuppressWarnings("deprecation")
     @Test public void validateAntFileMaskBounded() throws Exception {
@@ -641,6 +644,7 @@ public class FilePathTest {
     }
 
     @Issue("JENKINS-23507")
+    @Ignore
     @Test public void installIfNecessaryFollowsRedirects() throws Exception{
         File tmp = temp.getRoot();
         final FilePath d = new FilePath(tmp);

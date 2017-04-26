@@ -140,6 +140,7 @@ public class FunctionsTest {
     }
 
     @Test
+    @Ignore
     @PrepareForTest({Stapler.class, Jenkins.class})
     public void testGetRelativeLinkTo_JobFromComputer() throws Exception{
         Jenkins j = createMockJenkins();
