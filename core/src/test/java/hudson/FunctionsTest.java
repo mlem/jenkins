@@ -236,8 +236,8 @@ public class FunctionsTest {
         when(i2.getParent()).thenReturn(j);
 
         assertEquals("displayName", Functions.getRelativeDisplayNameFrom(i, ig));
-        assertEquals("parentDisplay » displayName", Functions.getRelativeDisplayNameFrom(i, j));
-        assertEquals(".. » top", Functions.getRelativeDisplayNameFrom(i2, ig));
+        assertEquals("parentDisplay \u00BB displayName", Functions.getRelativeDisplayNameFrom(i, j));
+        assertEquals(".. \u00BB top", Functions.getRelativeDisplayNameFrom(i2, ig));
     }
 
     private void createMockAncestors(StaplerRequest req, Ancestor... ancestors) {

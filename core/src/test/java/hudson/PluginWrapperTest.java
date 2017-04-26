@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.jar.Attributes;
 import java.util.jar.Manifest;
 
@@ -26,6 +27,7 @@ public class PluginWrapperTest {
 
     @Before
     public void before() throws Exception {
+        Locale.setDefault(Locale.ENGLISH);
         Jenkins.VERSION = "2.0"; // Some value needed - tests will overwrite if necessary
     }
 
