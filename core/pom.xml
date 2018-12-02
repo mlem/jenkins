@@ -40,7 +40,7 @@ THE SOFTWARE.
   <properties>
     <staplerFork>true</staplerFork>
     <stapler.version>1.250</stapler.version>
-    <spring.version>2.5.6.SEC03</spring.version>
+    <spring.version>3.2.1.RELEASE</spring.version>
     <groovy.version>2.4.8</groovy.version>
     <!-- TODO: Actually many issues are being filtered by src/findbugs/findbugs-excludes.xml -->
     <findbugs.failOnError>true</findbugs.failOnError>
@@ -281,7 +281,7 @@ THE SOFTWARE.
     <dependency>
         <groupId>org.apache.commons</groupId>
         <artifactId>commons-compress</artifactId>
-        <version>1.10</version>
+        <version>1.18</version>
     </dependency>
     <dependency>
       <groupId>javax.mail</groupId>
@@ -782,7 +782,7 @@ THE SOFTWARE.
             <manifest>
               <mainClass>hudson.Main</mainClass>
               <addClasspath>true</addClasspath>
-              <classpathPrefix />
+              <classpathPrefix/>
             </manifest>
           </archive>
         </configuration>
